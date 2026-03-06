@@ -4,10 +4,10 @@ export const siteConfig = {
   description:
     'Personal website of Trevor Lee focused on AI systems, responsible AI adoption, and secure, reliable engineering.',
   url: 'https://trevorlee.ca',
-  location: 'Greater Vancouver, BC',
+  location: 'Vancouver, BC, Canada',
   email: 'trevor@trevorlee.ca',
   emailObfuscated: 'trevor [at] trevorlee.ca',
-  tagline: 'Building reliable systems at the intersection of AI and security.',
+  tagline: 'Thoughtful AI systems. Built to be secure.',
   links: {
     linkedin: 'https://www.linkedin.com/in/ljtrevor/',
     github: 'https://github.com/ljtrevor'

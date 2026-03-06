@@ -1,6 +1,6 @@
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import GppGoodIcon from '@mui/icons-material/GppGood';
-import HubIcon from '@mui/icons-material/Hub';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import { Box, Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -29,19 +29,19 @@ export const metadata: Metadata = {
 
 const focusAreas = [
   {
-    title: 'AI integrations and responsible AI',
-    text: 'Designing practical AI-powered workflows while keeping data handling, guardrails, and user trust in focus.',
+    title: 'AI Systems',
+    text: 'Designing practical AI tools and integrations that turn complex data into useful insights, with safety and trust built in.',
     icon: <AutoAwesomeIcon color="primary" />
   },
   {
-    title: 'Secure systems and cybersecurity learning',
-    text: 'Building a stronger security foundation through hands-on study and architecture-minded engineering choices.',
+    title: 'Secure Systems',
+    text: 'Focused on cybersecurity and secure system design to ensure modern systems remain resilient and trustworthy.',
     icon: <GppGoodIcon color="primary" />
   },
   {
-    title: 'Reliability, incident investigations, and production systems',
-    text: 'Shipping dependable software and improving observability, response, and operational resilience over time.',
-    icon: <HubIcon color="primary" />
+    title: 'Reliable Systems',
+    text: 'Building dependable systems and strengthening observability, incident response, and operational resilience.',
+    icon: <MonitorHeartIcon color="primary" />
   }
 ];
 
@@ -60,10 +60,7 @@ export default function HomePage() {
             {siteConfig.tagline}
           </Typography>
           <Typography variant="body1" sx={{ maxWidth: 760 }}>
-            I&apos;m a software engineer and technology enthusiast who enjoys building practical systems that help people work
-            better. I&apos;ve worked on AI tools and integrations, including LLM workflows and orchestration patterns for
-            real-world teams. My work emphasizes responsible AI adoption and safe implementation in production environments.
-            I&apos;m also deepening my cybersecurity practice through secure systems thinking and CISSP (in progress).
+            I'm a software engineer building practical systems where AI, security, and real-world impact meet. Much of my work focuses on AI tools and integrations that turn complex data into useful insights. I am especially interested in responsible AI adoption and secure system design. Currently expanding cybersecurity expertise while preparing for the CISSP.
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Based in {siteConfig.location}

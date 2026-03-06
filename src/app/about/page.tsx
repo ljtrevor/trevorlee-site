@@ -1,5 +1,10 @@
+import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 import { Section } from '@/components/Section';
 
@@ -25,30 +30,43 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: 'Background',
+    icon: <WorkOutlineOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'I work across the stack and enjoy turning ambiguous ideas into software that is useful, maintainable, and ready for production. My day-to-day toolkit includes React, TypeScript, Python, and AWS.'
+      'I build reliable products that turn complex ideas into practical tools. My experience spans frontend interfaces, backend services, APIs, and cloud infrastructure, with a focus on systems that are maintainable, observable, and ready for production. I enjoy working across the full lifecycle of a product, from early design decisions through production operations.'
   },
   {
     title: 'AI work',
+    icon: <AutoAwesomeOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'A major part of my recent work has involved integrating LLM systems into existing product workflows. I care deeply about responsible handling of data, safe defaults, and making sure AI-powered features remain dependable under production load.'
+      'Much of my recent work has involved integrating large language models into real products and workflows. This includes designing AI-powered features, orchestrating model interactions, and ensuring these capabilities behave reliably in production environments. I place strong emphasis on responsible data handling, safe defaults, and building AI capabilities people can trust.'
   },
   {
-    title: 'Security focus',
+    title: 'Security',
+    icon: <ShieldOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'I am actively expanding my cybersecurity knowledge and applying those lessons in architecture decisions, threat-aware development, and operational hardening. I am especially interested in resilient systems and practical security architecture.'
+      'As AI becomes more embedded in modern software, I’ve become increasingly interested in the security implications of these technologies. I approach engineering decisions with a security mindset, considering threat models, operational resilience, and long-term reliability. I’m particularly interested in practical security architecture and resilient system design.'
   },
   {
     title: 'Now',
+    icon: <TrackChangesOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'CISSP is in progress, and I am exploring where AI engineering and cybersecurity overlap in practical, high-impact ways.'
+      'I’m currently preparing for the CISSP while deepening my understanding of how AI systems and cybersecurity intersect. My goal is to help ensure that modern software platforms can adopt AI capabilities safely while maintaining strong security and operational foundations.'
   }
-];
+] satisfies Array<{ title: string; icon: ReactNode; content: string }>;
 
 export default function AboutPage() {
   return (
     <Section>
-      <Stack spacing={4} sx={{ maxWidth: 980 }}>
+      <Stack
+        spacing={4}
+        sx={{
+          width: '100%',
+          mx: 'auto',
+          maxWidth: 980,
+          boxSizing: 'border-box',
+          overflowX: 'hidden'
+        }}
+      >
         <Box>
           <Typography component="h1" variant="h3" gutterBottom>
             About
@@ -58,8 +76,20 @@ export default function AboutPage() {
           </Typography>
         </Box>
 
-        <Grid container spacing={3} alignItems="stretch">
-          <Grid item xs={12} md={4}>
+        <Grid
+          container
+          rowSpacing={{ xs: 2, md: 3 }}
+          columnSpacing={{ xs: 0, md: 3 }}
+          alignItems="stretch"
+          sx={{
+            m: 0,
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box',
+            overflowX: 'hidden'
+          }}
+        >
+          <Grid item xs={12} md={4} sx={{ minWidth: 0, maxWidth: '100%' }}>
             <Card sx={{ height: '100%' }}>
               <CardContent>
                 <Stack spacing={2} alignItems="center" textAlign="center" sx={{ py: 2 }}>
@@ -78,15 +108,20 @@ export default function AboutPage() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={8} sx={{ minWidth: 0, maxWidth: '100%' }}>
             <Card>
               <CardContent>
                 <Stack divider={<Divider flexItem />} spacing={2.5}>
                   {sections.map((section) => (
                     <Box key={section.title}>
-                      <Typography variant="h6" component="h2" gutterBottom>
-                        {section.title}
-                      </Typography>
+                      <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                        <Box aria-hidden sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                          {section.icon}
+                        </Box>
+                        <Typography variant="h6" component="h2">
+                          {section.title}
+                        </Typography>
+                      </Stack>
                       <Typography color="text.secondary">{section.content}</Typography>
                     </Box>
                   ))}

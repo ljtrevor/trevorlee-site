@@ -73,7 +73,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Providers>
           <SiteHeader />
           <Box component="main" sx={{ minHeight: 'calc(100vh - 210px)' }}>
-            <Container maxWidth="lg">{children}</Container>
+            <Container
+              maxWidth="lg"
+              sx={{
+                px: { xs: 2, sm: 3, md: 4 }
+              }}
+            >
+              {children}
+            </Container>
           </Box>
           <SiteFooter />
         </Providers>

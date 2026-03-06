@@ -16,7 +16,7 @@ export function SiteFooter() {
           alignItems={{ xs: 'flex-start', sm: 'center' }}
         >
           <Typography variant="body2" color="text.secondary">
-            {new Date().getFullYear()} Trevor Lee
+            © {new Date().getFullYear()} Trevor Lee
           </Typography>
 
           <Stack direction="row" spacing={2}>
