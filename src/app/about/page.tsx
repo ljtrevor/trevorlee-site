@@ -1,5 +1,6 @@
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
-import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
+import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import { Avatar, Box, Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
@@ -9,21 +10,21 @@ import type { ReactNode } from 'react';
 import { Section } from '@/components/Section';
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About | Trevor Lee',
   description:
-    'About Trevor Lee: full-stack engineer with experience in React, TypeScript, Python, AWS, and responsible AI integration.',
+    'Learn about Trevor Lee, working at the intersection of AI systems, security, privacy-conscious design, and resilient technology.',
   alternates: { canonical: '/about' },
   openGraph: {
     title: 'About Trevor Lee',
     description:
-      'Background, AI work, and security focus for Trevor Lee, including current CISSP study progress.',
+      'Background, AI systems work, privacy-conscious design, and security focus for Trevor Lee, including current CISSP study progress.',
     url: '/about'
   },
   twitter: {
     card: 'summary',
     title: 'About Trevor Lee',
     description:
-      'Background, AI work, and security focus for Trevor Lee, including current CISSP study progress.'
+      'Background and focus areas of Trevor Lee across AI systems, security, and privacy-conscious design.',
   }
 };
 
@@ -32,25 +33,25 @@ const sections = [
     title: 'Background',
     icon: <WorkOutlineOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'I build reliable products that turn complex ideas into practical tools. My experience spans frontend interfaces, backend services, APIs, and cloud infrastructure, with a focus on systems that are maintainable, observable, and ready for production. I enjoy working across the full lifecycle of a product, from early design decisions through production operations.'
+      'My background is in building production software across frontend, backend, APIs, and cloud systems. I enjoy turning complex ideas into practical tools that are reliable, observable, and built to operate in real-world environments.'
   },
   {
-    title: 'AI work',
+    title: 'AI Work',
     icon: <AutoAwesomeOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'Much of my recent work has involved integrating large language models into real products and workflows. This includes designing AI-powered features, orchestrating model interactions, and ensuring these capabilities behave reliably in production environments. I place strong emphasis on responsible data handling, safe defaults, and building AI capabilities people can trust.'
+      'Much of my recent work has focused on integrating large language models into products and workflows. I’m particularly interested in building AI capabilities that are reliable, understandable, and designed with responsible use in mind.'
   },
   {
-    title: 'Security',
-    icon: <ShieldOutlinedIcon color="primary" fontSize="small" />,
+    title: 'Security & Privacy',
+    icon: <SecurityOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'As AI becomes more embedded in modern software, I’ve become increasingly interested in the security implications of these technologies. I approach engineering decisions with a security mindset, considering threat models, operational resilience, and long-term reliability. I’m particularly interested in practical security architecture and resilient system design.'
+      'As AI becomes embedded across systems, I’ve become increasingly interested in the security and privacy challenges that come with it. I focus on secure architecture, responsible data handling, and systems designed to protect both users and information.'
   },
   {
     title: 'Now',
     icon: <TrackChangesOutlinedIcon color="primary" fontSize="small" />,
     content:
-      'I’m currently preparing for the CISSP while deepening my understanding of how AI systems and cybersecurity intersect. My goal is to help ensure that modern software platforms can adopt AI capabilities safely while maintaining strong security and operational foundations.'
+      'I’m currently deepening my cybersecurity practice and preparing for the CISSP while exploring the intersection of AI, security, and privacy. My goal is to help organizations adopt modern technology in ways that are secure, responsible, and resilient.'
   }
 ] satisfies Array<{ title: string; icon: ReactNode; content: string }>;
 
@@ -72,7 +73,7 @@ export default function AboutPage() {
             About
           </Typography>
           <Typography color="text.secondary">
-            A quick overview of my technical background, current focus, and what I&apos;m learning now.
+            A quick overview of my background, current focus, and where I’m heading.
           </Typography>
         </Box>
 
@@ -80,7 +81,7 @@ export default function AboutPage() {
           container
           rowSpacing={{ xs: 2, md: 3 }}
           columnSpacing={{ xs: 0, md: 3 }}
-          alignItems="stretch"
+          alignItems="flex-start"
           sx={{
             m: 0,
             width: '100%',
@@ -89,20 +90,60 @@ export default function AboutPage() {
             overflowX: 'hidden'
           }}
         >
-          <Grid item xs={12} md={4} sx={{ minWidth: 0, maxWidth: '100%' }}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Stack spacing={2} alignItems="center" textAlign="center" sx={{ py: 2 }}>
-                  <Avatar
-                    alt="Placeholder portrait"
-                    sx={{ width: 96, height: 96, bgcolor: 'secondary.light', color: 'text.primary', fontSize: 14 }}
-                  >
-                    TL
-                  </Avatar>
-                  <Typography variant="h6">Photo coming soon</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    A proper headshot will be added here.
-                  </Typography>
+          <Grid item xs={12} md={4} sx={{ minWidth: 0, maxWidth: '100%', alignSelf: 'flex-start' }}>
+            <Card>
+              <CardContent sx={{ py: 3 }}>
+                <Stack spacing={2.5} alignItems="center" textAlign="center">
+
+                <Avatar
+                  src="/images/headshot-avatar.jpg"
+                  alt="Trevor Lee headshot"
+                  sx={{
+                    width: 180,
+                    height: 180,
+                    border: '2px solid',
+                    borderColor: 'divider',
+                  }}
+                />
+
+                  <Stack spacing={0.5}>
+                    <Typography variant="h6">Trevor Lee</Typography>
+
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ maxWidth: 220 }}
+                    >
+                      Building secure and responsible AI systems.
+                    </Typography>
+                  </Stack>
+
+                  <Divider flexItem sx={{ my: 1 }} />
+
+                  <Stack spacing={1.25} sx={{ width: '100%' }}>
+
+                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                      <PlaceOutlinedIcon fontSize="small" color="primary" />
+                      <Typography variant="body2" color="text.secondary">
+                        Greater Vancouver, BC
+                      </Typography>
+                    </Stack>
+
+                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                      <SecurityOutlinedIcon fontSize="small" color="primary" />
+                      <Typography variant="body2" color="text.secondary">
+                        AI Security & Privacy
+                      </Typography>
+                    </Stack>
+
+                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                      <TrackChangesOutlinedIcon fontSize="small" color="primary" />
+                      <Typography variant="body2" color="text.secondary">
+                        CISSP (in progress)
+                      </Typography>
+                    </Stack>
+
+                  </Stack>
                 </Stack>
               </CardContent>
             </Card>

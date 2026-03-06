@@ -9,38 +9,38 @@ import { Section } from '@/components/Section';
 import { siteConfig } from '@/components/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Trevor Lee | AI Security & Privacy',
   description:
-    'Trevor Lee builds AI systems and secure, reliable software with a focus on responsible AI and production resilience.',
+    'Trevor Lee works across AI systems, security, privacy-conscious design, and resilient systems.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Trevor Lee | AI Systems and Security Engineering',
+    title: 'Trevor Lee | AI Security & Privacy',
     description:
-      'Software engineer focused on AI integrations, responsible AI adoption, and secure production systems.',
+      'AI systems, security, privacy-conscious design, and resilient systems',
     url: '/'
   },
   twitter: {
     card: 'summary',
-    title: 'Trevor Lee | AI Systems and Security Engineering',
+    title: 'Trevor Lee | AI Security & Privacy',
     description:
-      'Software engineer focused on AI integrations, responsible AI adoption, and secure production systems.'
+      'AI systems, security, privacy-conscious design, and resilient systems'
   }
 };
 
 const focusAreas = [
   {
-    title: 'AI Systems',
-    text: 'Designing practical AI tools and integrations that turn complex data into useful insights, with safety and trust built in.',
+    title: 'AI',
+    text: 'Designing practical AI tools and integrations that turn complex data into insights, with trust, safety, and responsible use built in.',
     icon: <AutoAwesomeIcon color="primary" />
   },
   {
-    title: 'Secure Systems',
-    text: 'Focused on cybersecurity and secure system design to ensure modern systems remain resilient and trustworthy.',
+    title: 'Security & Privacy',
+    text: 'Focused on secure architecture, privacy-conscious data handling, and protecting systems, users, and information.',
     icon: <GppGoodIcon color="primary" />
   },
   {
-    title: 'Reliable Systems',
-    text: 'Building dependable systems and strengthening observability, incident response, and operational resilience.',
+    title: 'Reliability',
+    text: 'Strengthening observability, incident response, and operational resilience so systems remain dependable.',
     icon: <MonitorHeartIcon color="primary" />
   }
 ];
@@ -49,21 +49,15 @@ export default function HomePage() {
   return (
     <>
       <Section component="header">
-        <Stack spacing={2.5} sx={{ pt: { xs: 2, md: 6 }, maxWidth: 820 }}>
+        <Stack spacing={3} sx={{ pt: { xs: 2, md: 6 }, maxWidth: 820 }}>
           <Typography component="h1" variant="h2">
             Trevor Lee
           </Typography>
-          <Typography variant="h5" color="text.secondary">
-            AI Systems and Security Engineering
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="h5" color="text.secondary" sx={{ maxWidth: 700 }}>
             {siteConfig.tagline}
           </Typography>
-          <Typography variant="body1" sx={{ maxWidth: 760 }}>
-            I'm a software engineer building practical systems where AI, security, and real-world impact meet. Much of my work focuses on AI tools and integrations that turn complex data into useful insights. I am especially interested in responsible AI adoption and secure system design. Currently expanding cybersecurity expertise while preparing for the CISSP.
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Based in {siteConfig.location}
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760, lineHeight: 1.75 }}>
+            I work across AI systems, security, and responsible technology. My background includes building practical AI tools and integrations that turn complex data into useful insights. I’m particularly interested in trustworthy AI, privacy-conscious design, and secure system architecture. Currently expanding cybersecurity expertise while preparing for the CISSP.
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
             <Button component={Link} href="/cissp-study-log" variant="contained" size="large">

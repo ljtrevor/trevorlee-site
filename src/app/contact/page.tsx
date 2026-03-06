@@ -8,7 +8,7 @@ import { Section } from '@/components/Section';
 import { siteConfig } from '@/components/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact | Trevor Lee',
   description: 'Get in touch with Trevor Lee via email, LinkedIn, or GitHub.',
   alternates: { canonical: '/contact' },
   openGraph: {
