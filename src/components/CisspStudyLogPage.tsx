@@ -29,6 +29,44 @@ import {
 type DomainFilter = 'all' | number;
 type ChapterFilter = 'all' | number;
 
+const STUDY_SOURCE_TITLE =
+  'The ISC2 CISSP Official Study Guide, 10th Edition';
+
+const DOMAIN_LABELS: Record<number, string> = {
+  1: 'Security and Risk Management',
+  2: 'Asset Security',
+  3: 'Security Architecture and Engineering',
+  4: 'Communication and Network Security',
+  5: 'Identity and Access Management (IAM)',
+  6: 'Security Assessment and Testing',
+  7: 'Security Operations',
+  8: 'Software Development Security'
+};
+
+const CHAPTER_LABELS: Record<number, string> = {
+  1: 'Security Governance Through Principles and Policies',
+  2: 'Personnel Security and Risk Management Concepts',
+  3: 'Business Continuity Planning',
+  4: 'Laws, Regulations, and Compliance',
+  5: 'Protecting Security of Assets',
+  6: 'Cryptography and Symmetric Key Algorithms',
+  7: 'PKI and Cryptographic Applications',
+  8: 'Principles of Security Models, Design, and Capabilities',
+  9: 'Security Vulnerabilities, Threats, and Countermeasures',
+  10: 'Physical Security Requirements',
+  11: 'Secure Network Architecture and Components',
+  12: 'Secure Communications and Network Attacks',
+  13: 'Managing Identity and Authentication',
+  14: 'Controlling and Monitoring Access',
+  15: 'Security Assessment and Testing',
+  16: 'Managing Security Operations',
+  17: 'Preventing and Responding to Incidents',
+  18: 'Disaster Recovery Planning',
+  19: 'Investigations and Ethics',
+  20: 'Software Development Security',
+  21: 'Malicious Code and Application Attacks'
+};
+
 function doesEntryMatchSearch(entry: CisspEntry, query: string) {
   if (!query) {
     return true;
@@ -36,6 +74,14 @@ function doesEntryMatchSearch(entry: CisspEntry, query: string) {
 
   const haystack = `${entry.notes} ${(entry.tags ?? []).join(' ')}`.toLowerCase();
   return haystack.includes(query);
+}
+
+function getChapterLabel(chapter: number) {
+  return `Chapter ${chapter}: ${CHAPTER_LABELS[chapter] ?? 'Untitled chapter'}`;
+}
+
+function getDomainLabel(domain: number) {
+  return DOMAIN_LABELS[domain] ?? `Domain ${domain}`;
 }
 
 export function CisspStudyLogPage() {
@@ -76,8 +122,8 @@ export function CisspStudyLogPage() {
           CISSP Study Log
         </Typography>
         <Typography color="text.secondary">
-          This page is my public study diary while preparing for CISSP. I use it to track consistency, reinforce
-          chapters, and capture short reflections after each study session.
+          This page tracks my CISSP preparation using the <em>{STUDY_SOURCE_TITLE}</em>. <br />
+          I log each study session with the chapters covered and notes on concepts, questions, or insights that stood out.
         </Typography>
       </Box>
 
@@ -87,7 +133,9 @@ export function CisspStudyLogPage() {
             <Typography variant="h6" component="h2">
               Progress
             </Typography>
-            <Typography color="text.secondary">{`${completedChapters.length} / ${TOTAL_CHAPTERS} chapters logged`}</Typography>
+            <Typography color="text.secondary">
+              {`${completedChapters.length} / ${TOTAL_CHAPTERS} chapters logged`}
+            </Typography>
             <LinearProgress
               variant="determinate"
               value={progressValue}
@@ -117,11 +165,14 @@ export function CisspStudyLogPage() {
                   >
                     <MenuItem value="all">All domains</MenuItem>
                     {Array.from({ length: 8 }, (_, index) => index + 1).map((domain) => (
-                      <MenuItem key={domain} value={domain}>{`Domain ${domain}`}</MenuItem>
+                      <MenuItem key={domain} value={domain}>
+                        {getDomainLabel(domain)}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </Grid>
+
               <Grid item xs={12} md={4}>
                 <FormControl fullWidth>
                   <InputLabel id="chapter-filter-label">Chapter</InputLabel>
@@ -135,11 +186,14 @@ export function CisspStudyLogPage() {
                   >
                     <MenuItem value="all">All chapters</MenuItem>
                     {Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1).map((chapter) => (
-                      <MenuItem key={chapter} value={chapter}>{`Chapter ${chapter}`}</MenuItem>
+                      <MenuItem key={chapter} value={chapter}>
+                        {getChapterLabel(chapter)}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </Grid>
+
               <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
@@ -160,7 +214,7 @@ export function CisspStudyLogPage() {
               Chapter Coverage
             </Typography>
             <Typography color="text.secondary">
-              Click any chapter square to filter entries by that chapter.
+              Click any chapter to filter entries by that chapter.
             </Typography>
             <Grid container spacing={1}>
               {Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1).map((chapter) => {
@@ -175,7 +229,8 @@ export function CisspStudyLogPage() {
                       onClick={() => setChapterFilter(chapterFilter === chapter ? 'all' : chapter)}
                       color={selected ? 'primary' : completed ? 'secondary' : 'default'}
                       variant={selected || completed ? 'filled' : 'outlined'}
-                      aria-label={`Filter by chapter ${chapter}`}
+                      aria-label={`Filter by ${getChapterLabel(chapter)}`}
+                      title={getChapterLabel(chapter)}
                     />
                   </Grid>
                 );
@@ -198,20 +253,23 @@ export function CisspStudyLogPage() {
                   </Typography>
 
                   <Typography>
-                    <strong>Chapters:</strong> {entry.chapters.join(', ')}
+                    <strong>Chapters:</strong>{' '}
+                    {entry.chapters.map((chapter) => getChapterLabel(chapter)).join(' • ')}
                   </Typography>
 
                   <Typography>
                     <strong>Domains:</strong>{' '}
                     {derivedDomains.length > 0
-                      ? derivedDomains.map((domain) => `Domain ${domain}`).join(', ')
+                      ? derivedDomains.map((domain) => getDomainLabel(domain)).join(' • ')
                       : 'No mapped domain'}
                   </Typography>
 
                   <Typography>{entry.notes}</Typography>
 
                   {entry.minutesStudied ? (
-                    <Typography color="text.secondary">Minutes studied: {entry.minutesStudied}</Typography>
+                    <Typography color="text.secondary">
+                      Minutes studied: {entry.minutesStudied}
+                    </Typography>
                   ) : null}
 
                   {entry.tags && entry.tags.length > 0 ? (
@@ -230,7 +288,9 @@ export function CisspStudyLogPage() {
         {filteredEntries.length === 0 ? (
           <Card>
             <CardContent>
-              <Typography color="text.secondary">No entries match your current filters.</Typography>
+              <Typography color="text.secondary">
+                No entries match your current filters.
+              </Typography>
             </CardContent>
           </Card>
         ) : null}

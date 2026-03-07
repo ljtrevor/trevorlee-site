@@ -59,7 +59,7 @@ export default function AboutPage() {
   return (
     <Section>
       <Stack
-        spacing={4}
+        spacing={1}
         sx={{
           width: '100%',
           mx: 'auto',

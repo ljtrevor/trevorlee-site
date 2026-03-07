@@ -1,5 +1,6 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Card, CardContent, Link as MuiLink, Stack, Typography } from '@mui/material';
 import type { Metadata } from 'next';
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
     description: 'Reach Trevor Lee by email, LinkedIn, or GitHub.'
   }
 };
+
+const BUY_ME_A_COFFEE_URL = 'https://buymeacoffee.com/ljtrevor';
 
 export default function ContactPage() {
   return (
@@ -57,6 +60,15 @@ export default function ContactPage() {
                 sx={{ display: 'inline-flex', gap: 1 }}
               >
                 <GitHubIcon fontSize="small" /> GitHub
+              </MuiLink>
+              <MuiLink
+                href={BUY_ME_A_COFFEE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                underline="hover"
+                sx={{ display: 'inline-flex', gap: 1, alignItems: 'center' }}
+              >
+                <LocalCafeOutlinedIcon fontSize="small" /> Support my work
               </MuiLink>
             </Stack>
           </CardContent>
