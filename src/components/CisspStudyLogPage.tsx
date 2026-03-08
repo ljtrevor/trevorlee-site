@@ -2,6 +2,7 @@
 
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Chip,
@@ -15,7 +16,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   cisspEntries,
@@ -88,8 +89,72 @@ export function CisspStudyLogPage() {
   const [domainFilter, setDomainFilter] = useState<DomainFilter>('all');
   const [chapterFilter, setChapterFilter] = useState<ChapterFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isAutoDomainFromChapter, setIsAutoDomainFromChapter] = useState(false);
 
   const completedChapters = useMemo(() => getUniqueCompletedChapters(cisspEntries), []);
+  const availableChapters = useMemo(() => {
+    if (domainFilter === 'all') {
+      return Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1);
+    }
+
+    return DOMAIN_TO_CHAPTERS[domainFilter] ?? [];
+  }, [domainFilter]);
+
+  useEffect(() => {
+    if (chapterFilter === 'all') {
+      setIsAutoDomainFromChapter(false);
+      return;
+    }
+
+    if (!availableChapters.includes(chapterFilter)) {
+      setChapterFilter('all');
+      setIsAutoDomainFromChapter(false);
+    }
+  }, [availableChapters, chapterFilter]);
+
+  const handleDomainChange = (nextDomain: DomainFilter) => {
+    setDomainFilter(nextDomain);
+    setIsAutoDomainFromChapter(false);
+
+    if (nextDomain === 'all') {
+      setChapterFilter('all');
+    }
+  };
+
+  const handleChapterChange = (nextChapter: ChapterFilter) => {
+    setChapterFilter(nextChapter);
+
+    if (nextChapter === 'all') {
+      setIsAutoDomainFromChapter(false);
+      return;
+    }
+
+    if (domainFilter === 'all') {
+      const mappedDomain = getDomainsForChapters([nextChapter])[0];
+      if (mappedDomain) {
+        setDomainFilter(mappedDomain);
+        setIsAutoDomainFromChapter(true);
+      }
+    }
+  };
+
+  const chapterCoverageChapters = useMemo(() => {
+    if (isAutoDomainFromChapter && chapterFilter !== 'all') {
+      return [chapterFilter];
+    }
+
+    return availableChapters;
+  }, [availableChapters, chapterFilter, isAutoDomainFromChapter]);
+
+  const hasActiveFilters =
+    domainFilter !== 'all' || chapterFilter !== 'all' || searchQuery.trim().length > 0;
+
+  const handleClearFilters = () => {
+    setDomainFilter('all');
+    setChapterFilter('all');
+    setSearchQuery('');
+    setIsAutoDomainFromChapter(false);
+  };
 
   const filteredEntries = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -151,58 +216,72 @@ export function CisspStudyLogPage() {
             <Typography variant="h6" component="h2">
               Filters
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
-                <FormControl fullWidth>
-                  <InputLabel id="domain-filter-label">Domain</InputLabel>
-                  <Select
-                    labelId="domain-filter-label"
-                    value={domainFilter}
-                    label="Domain"
-                    onChange={(event) =>
-                      setDomainFilter(event.target.value === 'all' ? 'all' : Number(event.target.value))
-                    }
-                  >
-                    <MenuItem value="all">All domains</MenuItem>
-                    {Array.from({ length: 8 }, (_, index) => index + 1).map((domain) => (
-                      <MenuItem key={domain} value={domain}>
-                        {getDomainLabel(domain)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
+            <Box sx={{ px: { xs: 1, sm: 0 } }}>
+              <Grid container spacing={2} alignItems="stretch">
+                <Grid item xs={12} md={3}>
+                  <FormControl fullWidth>
+                    <InputLabel id="domain-filter-label">Domain</InputLabel>
+                    <Select
+                      labelId="domain-filter-label"
+                      value={domainFilter}
+                      label="Domain"
+                      onChange={(event) =>
+                        handleDomainChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
+                      }
+                    >
+                      <MenuItem value="all">All domains</MenuItem>
+                      {Array.from({ length: 8 }, (_, index) => index + 1).map((domain) => (
+                        <MenuItem key={domain} value={domain}>
+                          {getDomainLabel(domain)}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12} md={4}>
-                <FormControl fullWidth>
-                  <InputLabel id="chapter-filter-label">Chapter</InputLabel>
-                  <Select
-                    labelId="chapter-filter-label"
-                    value={chapterFilter}
-                    label="Chapter"
-                    onChange={(event) =>
-                      setChapterFilter(event.target.value === 'all' ? 'all' : Number(event.target.value))
-                    }
-                  >
-                    <MenuItem value="all">All chapters</MenuItem>
-                    {Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1).map((chapter) => (
-                      <MenuItem key={chapter} value={chapter}>
-                        {getChapterLabel(chapter)}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12} md={3}>
+                  <FormControl fullWidth>
+                    <InputLabel id="chapter-filter-label">Chapter</InputLabel>
+                    <Select
+                      labelId="chapter-filter-label"
+                      value={chapterFilter}
+                      label="Chapter"
+                      onChange={(event) =>
+                        handleChapterChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
+                      }
+                    >
+                      <MenuItem value="all">All chapters</MenuItem>
+                      {availableChapters.map((chapter) => (
+                        <MenuItem key={chapter} value={chapter}>
+                          {getChapterLabel(chapter)}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12} md={4}>
-                <TextField
-                  fullWidth
-                  label="Search notes or tags"
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                />
+                <Grid item xs={12} md={3}>
+                  <TextField
+                    fullWidth
+                    label="Search notes or tags"
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleClearFilters}
+                    disabled={!hasActiveFilters}
+                    sx={{ textTransform: 'none', px: 1.75 }}
+                  >
+                    Clear filters
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Stack>
         </CardContent>
       </Card>
@@ -217,7 +296,7 @@ export function CisspStudyLogPage() {
               Click any chapter to filter entries by that chapter.
             </Typography>
             <Grid container spacing={1}>
-              {Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1).map((chapter) => {
+              {chapterCoverageChapters.map((chapter) => {
                 const completed = completedChapters.includes(chapter);
                 const selected = chapterFilter === chapter;
 
@@ -226,7 +305,7 @@ export function CisspStudyLogPage() {
                     <Chip
                       label={chapter}
                       clickable
-                      onClick={() => setChapterFilter(chapterFilter === chapter ? 'all' : chapter)}
+                      onClick={() => handleChapterChange(chapterFilter === chapter ? 'all' : chapter)}
                       color={selected ? 'primary' : completed ? 'secondary' : 'default'}
                       variant={selected || completed ? 'filled' : 'outlined'}
                       aria-label={`Filter by ${getChapterLabel(chapter)}`}
