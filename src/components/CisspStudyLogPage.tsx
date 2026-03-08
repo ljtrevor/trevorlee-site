@@ -345,12 +345,6 @@ export function CisspStudyLogPage() {
 
                   <Typography>{entry.notes}</Typography>
 
-                  {entry.minutesStudied ? (
-                    <Typography color="text.secondary">
-                      Minutes studied: {entry.minutesStudied}
-                    </Typography>
-                  ) : null}
-
                   {entry.tags && entry.tags.length > 0 ? (
                     <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
                       {entry.tags.map((tag) => (

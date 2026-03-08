@@ -6,7 +6,6 @@ export interface CisspEntry {
   chapters: number[];
   notes: string;
   tags?: string[];
-  minutesStudied?: number;
 }
 
 export const TOTAL_CHAPTERS = 21;

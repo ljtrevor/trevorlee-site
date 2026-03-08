@@ -4,23 +4,20 @@
     "date": "2026-02-26",
     "chapters": [1, 2, 4],
     "notes": "Reviewed security and risk management foundations and reconciled notes with real production incidents I have seen. Spent extra time mapping terminology to practical controls.",
-    "tags": ["domain1", "risk", "foundations"],
-    "minutesStudied": 85
+    "tags": ["domain1", "risk", "foundations"]
   },
   {
     "id": "2026-02-21-iam-and-network",
     "date": "2026-02-21",
     "chapters": [5, 9, 10, 13],
     "notes": "Worked through identity and access concepts plus network communication controls. Built a short comparison sheet for authentication and authorization patterns.",
-    "tags": ["iam", "network", "domain2"],
-    "minutesStudied": 70
+    "tags": ["iam", "network", "domain2"]
   },
   {
-    "id": "2026-02-14-software-and-security-ops",
-    "date": "2026-02-14",
-    "chapters": [16, 20],
-    "notes": "Focused on software development security and operations topics. Captured key reminders around SDLC checkpoints and incident response feedback loops.",
-    "tags": ["domain6", "domain8", "sdlc"],
-    "minutesStudied": 60
+    "id": "2026-03-07",
+    "date": "2026-03-07",
+    "chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "notes": "Reviewed concepts and definitions from Chapters 1–9 based on questions I answered incorrectly in the end-of-chapter practice reviews.",
+    "tags": ["Review"]
   }
 ]
