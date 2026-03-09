@@ -28,6 +28,15 @@ export const metadata: Metadata = {
     template: '%s | Trevor Lee'
   },
   description: siteConfig.description,
+  robots: {
+    index: true,
+    follow: true
+  },
+  keywords: ['Trevor Lee', 'AI', 'Security', 'Privacy', 'CISSP', 'Software Engineering'],
+  category: 'technology',
+  icons: {
+    icon: '/icon.svg'
+  },
   alternates: {
     canonical: '/'
   },
@@ -37,12 +46,21 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: 'Trevor Lee',
     title: siteConfig.title,
-    description: siteConfig.description
+    description: siteConfig.description,
+    images: [
+      {
+        url: '/images/headshot-avatar.jpg',
+        width: 1200,
+        height: 1200,
+        alt: 'Trevor Lee'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.title,
-    description: siteConfig.description
+    description: siteConfig.description,
+    images: ['/images/headshot-avatar.jpg']
   }
 };
 

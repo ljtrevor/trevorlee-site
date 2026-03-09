@@ -25,12 +25,12 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {
   cisspEntries,
-  CisspEntry,
   DOMAIN_TO_CHAPTERS,
   getDomainsForChapters,
   getUniqueCompletedChapters,
   TOTAL_CHAPTERS
 } from '@/utils/cissp';
+import type { CisspEntry } from '@/utils/cissp';
 
 type DomainFilter = 'all' | number;
 type ChapterFilter = 'all' | number;

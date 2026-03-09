@@ -34,7 +34,7 @@ export default function ContactPage() {
           Contact
         </Typography>
         <Typography color="text.secondary">
-          If you would like to collaborate or just connect, I'd be happy to hear from you.
+          If you would like to collaborate or just connect, I&apos;d be happy to hear from you.
         </Typography>
 
         <Card>

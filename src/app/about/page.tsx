@@ -3,8 +3,9 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
-import { Avatar, Box, Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, Divider, Grid, Stack, Typography } from '@mui/material';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 
 import { Section } from '@/components/Section';
@@ -95,16 +96,25 @@ export default function AboutPage() {
               <CardContent sx={{ py: 3 }}>
                 <Stack spacing={2.5} alignItems="center" textAlign="center">
 
-                <Avatar
-                  src="/images/headshot-avatar.jpg"
-                  alt="Trevor Lee headshot"
+                <Box
                   sx={{
                     width: 180,
                     height: 180,
+                    borderRadius: '50%',
+                    overflow: 'hidden',
                     border: '2px solid',
                     borderColor: 'divider',
+                    position: 'relative'
                   }}
-                />
+                >
+                  <Image
+                    src="/images/headshot-avatar.jpg"
+                    alt="Trevor Lee headshot"
+                    fill
+                    sizes="180px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </Box>
 
                   <Stack spacing={0.5}>
                     <Typography variant="h6">Trevor Lee</Typography>

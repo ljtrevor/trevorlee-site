@@ -2,7 +2,7 @@
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import type { PropsWithChildren } from 'react';
-import { useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { ColorModeContext, COLOR_MODE_STORAGE_KEY } from '@/theme/colorMode';
 import { getSiteTheme, type SiteThemeMode } from '@/theme/theme';
@@ -11,7 +11,7 @@ export function Providers({ children }: PropsWithChildren) {
   // Keep the first client render aligned with SSR to prevent hydration mismatches.
   const [mode, setMode] = useState<SiteThemeMode>('light');
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fromStorage = localStorage.getItem(COLOR_MODE_STORAGE_KEY);
     const preferredMode: SiteThemeMode =
       fromStorage === 'dark' || fromStorage === 'light'

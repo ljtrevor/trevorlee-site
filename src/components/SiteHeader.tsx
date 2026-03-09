@@ -80,6 +80,8 @@ export function SiteHeader() {
           <IconButton
             color="inherit"
             aria-label="Open menu"
+            aria-controls="mobile-navigation"
+            aria-expanded={drawerOpen}
             onClick={() => setDrawerOpen(true)}
             sx={{ display: { xs: 'inline-flex', md: 'none' } }}
           >
@@ -89,7 +91,7 @@ export function SiteHeader() {
       </Container>
 
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Box sx={{ width: 260, p: 2 }} role="navigation" aria-label="Mobile navigation">
+        <Box id="mobile-navigation" sx={{ width: 260, p: 2 }} role="navigation" aria-label="Mobile navigation">
           <Stack spacing={1}>
             {navItems.map((item) => (
               <Button

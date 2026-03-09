@@ -64,3 +64,17 @@ html[data-color-mode='dark'] .MuiTypography-root {
 .card-lift:hover {
   transform: translateY(-2px);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body,
+  .card-lift,
+  .section-enter {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .card-lift:hover {
+    transform: none;
+  }
+}

@@ -9,19 +9,19 @@ import { Section } from '@/components/Section';
 import { siteConfig } from '@/components/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Trevor Lee | AI Security & Privacy',
+  title: 'AI Security & Privacy',
   description:
     'Trevor Lee works across AI systems, security, privacy-conscious design, and resilient systems.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Trevor Lee | AI Security & Privacy',
+    title: 'AI Security & Privacy',
     description:
       'AI systems, security, privacy-conscious design, and resilient systems',
     url: '/'
   },
   twitter: {
     card: 'summary',
-    title: 'Trevor Lee | AI Security & Privacy',
+    title: 'AI Security & Privacy',
     description:
       'AI systems, security, privacy-conscious design, and resilient systems'
   }
