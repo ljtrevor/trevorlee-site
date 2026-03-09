@@ -1,23 +1,338 @@
 [
   {
-    "id": "2026-02-26-domain1-review",
-    "date": "2026-02-26",
-    "chapters": [1, 2, 4],
-    "notes": "Reviewed security and risk management foundations and reconciled notes with real production incidents I have seen. Spent extra time mapping terminology to practical controls.",
-    "tags": ["domain1", "risk", "foundations"]
+    "id": "2026-01-03",
+    "date": "2026-01-03",
+    "chapters": [1],
+    "notes": "Started Chapter 1 covering foundational security concepts including the CIA triad, authenticity, and nonrepudiation. Focused on understanding how governance and policy frameworks guide security programs.",
+    "tags": ["Reading", "Notes"]
   },
   {
-    "id": "2026-02-21-iam-and-network",
-    "date": "2026-02-21",
-    "chapters": [5, 9, 10, 13],
-    "notes": "Worked through identity and access concepts plus network communication controls. Built a short comparison sheet for authentication and authorization patterns.",
-    "tags": ["iam", "network", "domain2"]
+    "id": "2026-01-04",
+    "date": "2026-01-04",
+    "chapters": [1],
+    "notes": "Continued Chapter 1 and reviewed how security governance aligns with business objectives. Took notes on policies, standards, procedures, and guidelines and how they differ in practice.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-05",
+    "date": "2026-01-05",
+    "chapters": [1],
+    "notes": "Studied threat modeling concepts and supply chain risk management. Interesting to see how governance structures shape how organizations identify and manage risk.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-06",
+    "date": "2026-01-06",
+    "chapters": [1],
+    "notes": "Finished Chapter 1 and summarized core governance ideas and security principles. Created a quick reference for CIA triad concepts and policy hierarchy.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-08",
+    "date": "2026-01-08",
+    "chapters": [2],
+    "notes": "Started Chapter 2 covering personnel security concepts and risk management foundations. Took notes on how human factors and insider threats influence security programs.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-09",
+    "date": "2026-01-09",
+    "chapters": [2],
+    "notes": "Reviewed risk management frameworks and the role of organizational policies in managing security risk. Noted how structured frameworks help standardize security decision making.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-10",
+    "date": "2026-01-10",
+    "chapters": [2],
+    "notes": "Focused on social engineering threats and how attackers exploit human behavior. Added examples of phishing and pretexting attacks to my notes.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-11",
+    "date": "2026-01-11",
+    "chapters": [2],
+    "notes": "Studied the importance of security awareness, training, and education programs. Interesting to see how culture and training influence overall security posture.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-12",
+    "date": "2026-01-12",
+    "chapters": [2],
+    "notes": "Finished Chapter 2 and summarized key personnel security practices and risk management ideas. Flagged social engineering defenses as an area worth revisiting.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-14",
+    "date": "2026-01-14",
+    "chapters": [3],
+    "notes": "Started Chapter 3 on business continuity planning. Reviewed the purpose of BCP and how organizations prepare for disruptions and operational outages.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-15",
+    "date": "2026-01-15",
+    "chapters": [3],
+    "notes": "Studied the business impact analysis process and how organizations identify critical systems and acceptable downtime. Noted the importance of recovery objectives.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-16",
+    "date": "2026-01-16",
+    "chapters": [3],
+    "notes": "Continued Chapter 3 with continuity strategy development and recovery planning. Interesting to see how technical and business priorities must align.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-17",
+    "date": "2026-01-17",
+    "chapters": [3],
+    "notes": "Finished Chapter 3 and summarized the full BCP lifecycle including planning, implementation, and approval. Wrote out a quick checklist of BCP steps.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-19",
+    "date": "2026-01-19",
+    "chapters": [4],
+    "notes": "Started Chapter 4 reviewing legal systems and how laws influence cybersecurity practices. Took notes on criminal, civil, and administrative law categories.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-20",
+    "date": "2026-01-20",
+    "chapters": [4],
+    "notes": "Continued Chapter 4 with privacy laws, regulatory requirements, and compliance obligations. Interesting how different jurisdictions approach data protection.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-21",
+    "date": "2026-01-21",
+    "chapters": [4],
+    "notes": "Reviewed contracts, procurement considerations, and legal responsibilities around information security. Noted how vendor relationships affect compliance risk.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-22",
+    "date": "2026-01-22",
+    "chapters": [4],
+    "notes": "Worked through examples of compliance frameworks and regulatory oversight. Added notes comparing regulatory requirements to internal security policies.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-23",
+    "date": "2026-01-23",
+    "chapters": [4],
+    "notes": "Finished Chapter 4 and summarized major legal and regulatory concepts relevant to cybersecurity. Created a quick reference list of common compliance drivers.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-25",
+    "date": "2026-01-25",
+    "chapters": [5],
+    "notes": "Started Chapter 5 covering asset security and information classification. Reviewed how organizations identify and categorize sensitive data.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-26",
+    "date": "2026-01-26",
+    "chapters": [5],
+    "notes": "Studied asset ownership roles and responsibilities along with handling requirements. Interesting how classification decisions influence control selection.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-27",
+    "date": "2026-01-27",
+    "chapters": [5],
+    "notes": "Focused on data protection mechanisms and secure handling practices throughout the information lifecycle.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-28",
+    "date": "2026-01-28",
+    "chapters": [5],
+    "notes": "Finished Chapter 5 and summarized asset classification models and security baselines used to protect sensitive information.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-30",
+    "date": "2026-01-30",
+    "chapters": [6],
+    "notes": "Started Chapter 6 reviewing the foundations of cryptography. Took notes on encryption concepts and the role cryptography plays in protecting data.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-01-31",
+    "date": "2026-01-31",
+    "chapters": [6],
+    "notes": "Studied symmetric encryption algorithms and how secret keys are used to protect confidentiality. Noted common algorithm examples and their tradeoffs.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-01",
+    "date": "2026-02-01",
+    "chapters": [6],
+    "notes": "Reviewed cryptographic lifecycle concepts including key generation, distribution, rotation, and destruction.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-02",
+    "date": "2026-02-02",
+    "chapters": [6],
+    "notes": "Finished Chapter 6 and summarized symmetric cryptography concepts and where encryption fits into overall system security.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-04",
+    "date": "2026-02-04",
+    "chapters": [7],
+    "notes": "Started Chapter 7 focusing on asymmetric cryptography and public key infrastructure concepts.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-05",
+    "date": "2026-02-05",
+    "chapters": [7],
+    "notes": "Studied digital signatures, hashing algorithms, and the role they play in integrity and authentication.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-06",
+    "date": "2026-02-06",
+    "chapters": [7],
+    "notes": "Reviewed PKI components including certificate authorities, registration authorities, and certificate management.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-07",
+    "date": "2026-02-07",
+    "chapters": [7],
+    "notes": "Finished Chapter 7 and summarized how hybrid cryptography combines symmetric and asymmetric methods in real-world systems.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-09",
+    "date": "2026-02-09",
+    "chapters": [8],
+    "notes": "Started Chapter 8 covering secure system design principles and foundational security models.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-10",
+    "date": "2026-02-10",
+    "chapters": [8],
+    "notes": "Reviewed common security models and how they enforce confidentiality, integrity, and access control.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-11",
+    "date": "2026-02-11",
+    "chapters": [8],
+    "notes": "Studied system security capabilities and the role of controls in enforcing secure design principles.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-12",
+    "date": "2026-02-12",
+    "chapters": [8],
+    "notes": "Finished Chapter 8 and summarized secure architecture concepts and design techniques for protecting systems.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-14",
+    "date": "2026-02-14",
+    "chapters": [9],
+    "notes": "Started Chapter 9 reviewing common security vulnerabilities and threat categories.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-15",
+    "date": "2026-02-15",
+    "chapters": [9],
+    "notes": "Studied vulnerabilities across modern architectures including cloud, IoT, and containerized systems.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-16",
+    "date": "2026-02-16",
+    "chapters": [9],
+    "notes": "Reviewed common attack methods and countermeasures used to protect client, server, and distributed systems.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-17",
+    "date": "2026-02-17",
+    "chapters": [9],
+    "notes": "Finished Chapter 9 and summarized key vulnerability patterns and defensive strategies.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-02-18",
+    "date": "2026-02-18",
+    "chapters": [1],
+    "notes": "Reviewed Chapter 1 and completed the end-of-chapter practice questions. Focused on reinforcing governance concepts, the CIA triad, and how policies and standards support security programs.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-02-20",
+    "date": "2026-02-20",
+    "chapters": [2],
+    "notes": "Reviewed Chapter 2 and worked through the practice questions. Helped clarify personnel security concepts and how training and awareness programs reduce social engineering risk.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-02-22",
+    "date": "2026-02-22",
+    "chapters": [3],
+    "notes": "Reviewed Chapter 3 and completed the practice questions. Revisited business impact analysis concepts and the key steps in business continuity planning.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-02-24",
+    "date": "2026-02-24",
+    "chapters": [4],
+    "notes": "Reviewed Chapter 4 and completed the chapter questions. Focused on distinguishing legal frameworks, privacy regulations, and compliance responsibilities.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-02-26",
+    "date": "2026-02-26",
+    "chapters": [5],
+    "notes": "Reviewed Chapter 5 and completed the practice questions. Reinforced asset classification concepts and how handling requirements protect sensitive information.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-02-28",
+    "date": "2026-02-28",
+    "chapters": [6],
+    "notes": "Reviewed Chapter 6 and completed the end-of-chapter questions. Revisited symmetric cryptography concepts and key management fundamentals.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-03-02",
+    "date": "2026-03-02",
+    "chapters": [7],
+    "notes": "Reviewed Chapter 7 and completed the practice questions. Focused on PKI components, digital signatures, and how asymmetric cryptography supports authentication and integrity.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-03-04",
+    "date": "2026-03-04",
+    "chapters": [8],
+    "notes": "Reviewed Chapter 8 and worked through the practice questions. Reinforced secure design principles and how security models influence system architecture decisions.",
+    "tags": ["Review", "Practice Questions"]
+  },
+  {
+    "id": "2026-03-05",
+    "date": "2026-03-05",
+    "chapters": [9],
+    "notes": "Reviewed Chapter 9 and completed the practice questions. Focused on common vulnerability patterns and the countermeasures used to protect modern systems.",
+    "tags": ["Review", "Practice Questions"]
   },
   {
     "id": "2026-03-07",
     "date": "2026-03-07",
     "chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    "notes": "Reviewed concepts and definitions from Chapters 1–9 based on questions I answered incorrectly in the end-of-chapter practice reviews.",
+    "notes": "Reviewed concepts and definitions from Chapters 1–9 based on questions I answered incorrectly during the end-of-chapter practice reviews.",
     "tags": ["Review"]
   }
 ]

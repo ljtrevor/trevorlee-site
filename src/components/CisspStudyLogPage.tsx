@@ -1,6 +1,10 @@
 'use client';
 
 import {
+  ChevronLeftRounded,
+  ChevronRightRounded
+} from '@mui/icons-material';
+import {
   Box,
   Button,
   Card,
@@ -16,6 +20,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+import type { Theme } from '@mui/material/styles';
 import { useEffect, useMemo, useState } from 'react';
 
 import {
@@ -32,6 +37,7 @@ type ChapterFilter = 'all' | number;
 
 const STUDY_SOURCE_TITLE =
   'The ISC2 CISSP Official Study Guide, 10th Edition';
+const ENTRIES_PER_PAGE = 5;
 
 const DOMAIN_LABELS: Record<number, string> = {
   1: 'Security and Risk Management',
@@ -85,11 +91,39 @@ function getDomainLabel(domain: number) {
   return DOMAIN_LABELS[domain] ?? `Domain ${domain}`;
 }
 
+function getTagChipSx(tag: string) {
+  const normalizedTag = tag.toLowerCase();
+
+  return (theme: Theme) => {
+    const colorKey =
+      normalizedTag === 'reading'
+        ? 'primary'
+        : normalizedTag === 'notes'
+          ? 'info'
+          : normalizedTag === 'review'
+            ? 'secondary'
+            : normalizedTag === 'practice questions'
+              ? 'success'
+              : 'warning';
+
+    const paletteColor = theme.palette[colorKey];
+    const isDark = theme.palette.mode === 'dark';
+
+    return {
+      borderColor: isDark ? paletteColor.dark : paletteColor.light,
+      backgroundColor: isDark ? `${paletteColor.main}33` : `${paletteColor.main}22`,
+      color: isDark ? paletteColor.light : paletteColor.dark,
+      fontWeight: 500
+    };
+  };
+}
+
 export function CisspStudyLogPage() {
   const [domainFilter, setDomainFilter] = useState<DomainFilter>('all');
   const [chapterFilter, setChapterFilter] = useState<ChapterFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAutoDomainFromChapter, setIsAutoDomainFromChapter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const completedChapters = useMemo(() => getUniqueCompletedChapters(cisspEntries), []);
   const availableChapters = useMemo(() => {
@@ -177,6 +211,22 @@ export function CisspStudyLogPage() {
       return doesEntryMatchSearch(entry, normalizedQuery);
     });
   }, [chapterFilter, domainFilter, searchQuery]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredEntries.length / ENTRIES_PER_PAGE));
+  const paginatedEntries = useMemo(() => {
+    const start = (currentPage - 1) * ENTRIES_PER_PAGE;
+    return filteredEntries.slice(start, start + ENTRIES_PER_PAGE);
+  }, [currentPage, filteredEntries]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [chapterFilter, domainFilter, searchQuery]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
   const progressValue = (completedChapters.length / TOTAL_CHAPTERS) * 100;
 
@@ -320,7 +370,7 @@ export function CisspStudyLogPage() {
       </Card>
 
       <Stack spacing={2} component="section" aria-label="Study entries">
-        {filteredEntries.map((entry) => {
+        {paginatedEntries.map((entry) => {
           const derivedDomains = getDomainsForChapters(entry.chapters);
 
           return (
@@ -348,7 +398,13 @@ export function CisspStudyLogPage() {
                   {entry.tags && entry.tags.length > 0 ? (
                     <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
                       {entry.tags.map((tag) => (
-                        <Chip key={`${entry.id}-${tag}`} label={tag} size="small" variant="outlined" />
+                        <Chip
+                          key={`${entry.id}-${tag}`}
+                          label={tag}
+                          size="small"
+                          variant="outlined"
+                          sx={getTagChipSx(tag)}
+                        />
                       ))}
                     </Stack>
                   ) : null}
@@ -366,6 +422,73 @@ export function CisspStudyLogPage() {
               </Typography>
             </CardContent>
           </Card>
+        ) : null}
+
+        {filteredEntries.length > 0 ? (
+          <Box
+            sx={(theme) => ({
+              border: `1px solid ${theme.palette.divider}`,
+              borderRadius: 3,
+              px: { xs: 1.5, sm: 2 },
+              py: 1.5,
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
+                : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
+            })}
+          >
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={1.5}
+              justifyContent="space-between"
+              alignItems={{ xs: 'stretch', sm: 'center' }}
+            >
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ textAlign: { xs: 'center', sm: 'left' } }}
+              >
+                Page {currentPage} of {totalPages}
+              </Typography>
+              <Stack direction="row" spacing={1} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="medium"
+                  startIcon={<ChevronLeftRounded />}
+                  onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                  disabled={currentPage === 1}
+                  sx={{
+                    minWidth: { xs: 0, sm: 116 },
+                    flex: { xs: 1, sm: 'unset' },
+                    borderRadius: 999,
+                    boxShadow: 'none',
+                    '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
+                    '&:disabled': { opacity: 0.6 }
+                  }}
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="medium"
+                  endIcon={<ChevronRightRounded />}
+                  onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+                  disabled={currentPage === totalPages}
+                  sx={{
+                    minWidth: { xs: 0, sm: 96 },
+                    flex: { xs: 1, sm: 'unset' },
+                    borderRadius: 999,
+                    boxShadow: 'none',
+                    '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
+                    '&:disabled': { opacity: 0.6 }
+                  }}
+                >
+                  Next
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
         ) : null}
       </Stack>
     </Stack>
