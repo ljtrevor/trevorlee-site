@@ -57,7 +57,7 @@ export default function HomePage() {
             {siteConfig.tagline}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760, lineHeight: 1.75 }}>
-            I work across AI systems, security, and responsible technology. My background includes building practical AI tools and integrations that turn complex data into useful insights. I’m particularly interested in trustworthy AI, privacy-conscious design, and secure system architecture. Currently expanding cybersecurity expertise while preparing for the CISSP.
+            I work across AI systems, security, and responsible technology. My background includes building practical AI tools and integrations that turn complex data into useful insights. I’m particularly interested in trustworthy AI, privacy-conscious design, and secure system architecture. I am currently expanding my cybersecurity expertise while preparing for the CISSP.
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
             <Button component={Link} href="/cissp-study-log" variant="contained" size="large">

@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static';
+
 const routes = ['/', '/about', '/cissp-study-log', '/contact'];
 
 export default function sitemap(): MetadataRoute.Sitemap {

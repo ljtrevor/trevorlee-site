@@ -1,99 +1,95 @@
 # Trevor Lee Personal Website
 
-Production-ready personal website for Trevor Lee built with Next.js App Router, TypeScript, and MUI.
+Production-ready personal site built with Next.js App Router, React, TypeScript, and MUI.
 
 ## Stack
-- Next.js (App Router) + React + TypeScript
-- Material UI (MUI v5)
-- Static export (`output: 'export'`) for AWS S3 + CloudFront
+- Next.js 15 (App Router)
+- React 18 + TypeScript
+- MUI v5 + Emotion
+- Static export for deployment (`output: 'export'`)
 - Optional GA4 via `@next/third-parties/google`
 
-## Features
-- 4 pages: Home, About, CISSP Study Log, Contact
-- Japandi-inspired light theme with responsive navigation and mobile drawer
-- SEO metadata per page, Open Graph, Twitter card metadata
-- `robots.txt` and `sitemap.xml`
-- Accessible heading structure and keyboard-focus styling
-- CISSP study log with JSON-backed entries, filters, domain mapping, and chapter coverage grid
+## Routes
+- `/` Home
+- `/about` About
+- `/cissp-study-log` CISSP Study Log
+- `/contact` Contact
 
-## Installation
-1. Install dependencies:
+## Key Production Characteristics
+- Static export enabled in `next.config.js`
+- SEO metadata configured globally + per route
+- `robots.txt` and `sitemap.xml` generated via App Router metadata routes
+- Next font optimization with `next/font/google` (Plus Jakarta Sans + Noto Sans JP)
+- Optional Google Analytics injection via env var
+- Theme mode pre-hydration script to reduce flash and hydration mismatch risk
+- Accessibility improvements including reduced motion support and mobile nav ARIA state
 
+## Local Development
+### Prerequisites
+- Node.js 20+
+- npm
+
+### Install
 ```bash
 npm install
 ```
 
-## Run Locally
+### Run
 ```bash
 npm run dev
 ```
 
 Open `http://localhost:3000`.
 
-## Add CISSP Study Entries
-Edit:
-- `src/data/cisspLog.json`
+## Scripts
+- `npm run dev` Start dev server
+- `npm run build` Create production build + static export (`out/`)
+- `npm run start` Run Next production server (not required for S3 static hosting)
+- `npm run lint` Run ESLint
+- `npm run typecheck` Run TypeScript checks (`tsc --noEmit`)
 
-Entry schema:
-
-```ts
-{
-  id: string;
-  date: string; // YYYY-MM-DD
-  chapters: number[];
-  notes: string;
-  tags?: string[];
-  minutesStudied?: number;
-}
-```
-
-After editing entries, rebuild and redeploy.
-
-## Set Google Analytics (GA4)
-GA loads only if `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set.
-
-Create `.env.local`:
+## Environment Variables
+Create `.env.local` as needed.
 
 ```bash
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-If unset, GA is not injected.
+- If set, GA4 is loaded.
+- If unset, no GA script is injected.
 
-## Static Build
+## CISSP Study Log Data
+Edit entries in:
+- `src/data/cisspLog.json`
+
+After updates, rebuild and redeploy.
+
+## Build Output
 ```bash
 npm run build
 ```
 
-This generates static output in:
+Static artifacts are generated in:
 - `out/`
 
-## Deploy to AWS S3 + CloudFront
+## Deployment (AWS S3 + CloudFront)
+1. Create S3 bucket and upload contents of `out/`.
+2. Configure CloudFront with S3 origin and default root object `index.html`.
+3. Add custom error responses for App Router deep links:
+   - `403 -> /index.html` (response `200`)
+   - `404 -> /index.html` (response `200`)
+4. Attach ACM certificate and point DNS to CloudFront.
 
-### 1) S3 static hosting
-- Create an S3 bucket for the site.
-- Upload the contents of `out/`.
-- Enable static website hosting.
-- Set index document to `index.html`.
+## Validation Before Deploy
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-### 2) CloudFront distribution
-- Use the S3 website endpoint as origin (or S3 origin + OAC/OAI based on your setup).
-- Set default root object: `index.html`.
+## Troubleshooting
+### `next/font/google` fetch failures during build
+In restricted network environments, Google font downloads can fail during `npm run build`.
+- Verify outbound access in CI/deploy environment.
+- Re-run build in a network with access to Google Fonts endpoints.
 
-### 3) Custom error responses (required for deep links)
-Configure:
-- `403` -> `/index.html` with response code `200`
-- `404` -> `/index.html` with response code `200`
-
-This prevents refresh/deep-link failures for routes like `/about`.
-
-### 4) Domain + HTTPS
-- Attach ACM certificate for `trevorlee.ca` (and `www` if needed).
-- Point DNS to CloudFront.
-
-## Scripts
-- `npm run dev` - local development
-- `npm run build` - production static build
-- `npm run start` - Next start (not required for S3 static hosting)
-- `npm run lint` - lint checks
-- `npm run typecheck` - TypeScript check
