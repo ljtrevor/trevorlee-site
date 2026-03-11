@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 const BUY_ME_A_COFFEE_URL = 'https://buymeacoffee.com/ljtrevor';
+const CONTACT_LINK_SX = { display: 'inline-flex', gap: 1, alignItems: 'center' } as const;
 
 export default function ContactPage() {
   return (
@@ -40,7 +41,7 @@ export default function ContactPage() {
         <Card>
           <CardContent>
             <Stack spacing={2.5}>
-              <MuiLink href={`mailto:${siteConfig.email}`} underline="hover" sx={{ display: 'inline-flex', gap: 1 }}>
+              <MuiLink href={`mailto:${siteConfig.email}`} underline="hover" sx={CONTACT_LINK_SX}>
                 <MailOutlineIcon fontSize="small" /> {siteConfig.emailObfuscated}
               </MuiLink>
               <MuiLink
@@ -48,7 +49,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 underline="hover"
-                sx={{ display: 'inline-flex', gap: 1 }}
+                sx={CONTACT_LINK_SX}
               >
                 <LinkedInIcon fontSize="small" /> LinkedIn
               </MuiLink>
@@ -57,7 +58,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 underline="hover"
-                sx={{ display: 'inline-flex', gap: 1 }}
+                sx={CONTACT_LINK_SX}
               >
                 <GitHubIcon fontSize="small" /> GitHub
               </MuiLink>
@@ -66,7 +67,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 underline="hover"
-                sx={{ display: 'inline-flex', gap: 1, alignItems: 'center' }}
+                sx={CONTACT_LINK_SX}
               >
                 <LocalCafeOutlinedIcon fontSize="small" /> Support my work
               </MuiLink>

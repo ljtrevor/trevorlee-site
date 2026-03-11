@@ -5,6 +5,8 @@ import { Box, Container, Link as MuiLink, Stack, Typography } from '@mui/materia
 
 import { siteConfig } from './siteConfig';
 
+const FOOTER_LINK_SX = { display: 'inline-flex', alignItems: 'center', gap: 0.5 } as const;
+
 export function SiteFooter() {
   return (
     <Box component="footer" sx={{ borderTop: '1px solid', borderColor: 'divider', mt: 10, py: 4 }}>
@@ -25,7 +27,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               underline="hover"
-              sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+              sx={FOOTER_LINK_SX}
             >
               <LinkedInIcon fontSize="small" /> LinkedIn
             </MuiLink>
@@ -34,14 +36,14 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               underline="hover"
-              sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+              sx={FOOTER_LINK_SX}
             >
               <GitHubIcon fontSize="small" /> GitHub
             </MuiLink>
             <MuiLink
               href={`mailto:${siteConfig.email}`}
               underline="hover"
-              sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+              sx={FOOTER_LINK_SX}
             >
               <MailOutlineIcon fontSize="small" /> Email
             </MuiLink>

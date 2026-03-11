@@ -49,21 +49,25 @@ export function SiteHeader() {
           </Typography>
 
           <Stack direction="row" spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.href}
-                component={Link}
-                href={item.href}
-                color="inherit"
-                sx={{
-                  border: isActive(item.href) ? '1px solid' : '1px solid transparent',
-                  borderColor: isActive(item.href) ? 'divider' : 'transparent',
-                  backgroundColor: isActive(item.href) ? 'background.paper' : 'transparent'
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+
+              return (
+                <Button
+                  key={item.href}
+                  component={Link}
+                  href={item.href}
+                  color="inherit"
+                  sx={{
+                    border: active ? '1px solid' : '1px solid transparent',
+                    borderColor: active ? 'divider' : 'transparent',
+                    backgroundColor: active ? 'background.paper' : 'transparent'
+                  }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
           </Stack>
 
           <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
@@ -93,19 +97,23 @@ export function SiteHeader() {
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box id="mobile-navigation" sx={{ width: 260, p: 2 }} role="navigation" aria-label="Mobile navigation">
           <Stack spacing={1}>
-            {navItems.map((item) => (
-              <Button
-                key={item.href}
-                component={Link}
-                href={item.href}
-                onClick={() => setDrawerOpen(false)}
-                variant={isActive(item.href) ? 'contained' : 'text'}
-                color={isActive(item.href) ? 'primary' : 'inherit'}
-                sx={{ justifyContent: 'flex-start' }}
-              >
-                {item.label}
-              </Button>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+
+              return (
+                <Button
+                  key={item.href}
+                  component={Link}
+                  href={item.href}
+                  onClick={() => setDrawerOpen(false)}
+                  variant={active ? 'contained' : 'text'}
+                  color={active ? 'primary' : 'inherit'}
+                  sx={{ justifyContent: 'flex-start' }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
           </Stack>
         </Box>
       </Drawer>

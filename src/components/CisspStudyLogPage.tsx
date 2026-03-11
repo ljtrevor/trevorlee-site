@@ -11,6 +11,7 @@ import {
   InputLabel,
   LinearProgress,
   MenuItem,
+  Pagination,
   Select,
   Stack,
   TextField,
@@ -29,6 +30,12 @@ import {
 type DomainFilter = 'all' | number;
 type ChapterFilter = 'all' | number;
 
+type FiltersState = {
+  domain: DomainFilter;
+  chapter: ChapterFilter;
+  query: string;
+};
+
 type CisspStudyLogPageProps = {
   initialEntries: CisspEntry[];
   initialTotalEntries: number;
@@ -38,6 +45,8 @@ type CisspStudyLogPageProps = {
 const STUDY_SOURCE_TITLE =
   'The ISC2 CISSP Official Study Guide, 10th Edition';
 const ENTRIES_PER_PAGE = 5;
+const ALL_DOMAINS = Array.from({ length: 8 }, (_, index) => index + 1);
+const ALL_CHAPTERS = Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1);
 
 const DOMAIN_LABELS: Record<number, string> = {
   1: 'Security and Risk Management',
@@ -91,6 +100,10 @@ function getDomainLabel(domain: number) {
   return DOMAIN_LABELS[domain] ?? `Domain ${domain}`;
 }
 
+function getDomainOptionLabel(domain: number) {
+  return `Domain ${domain}: ${getDomainLabel(domain)}`;
+}
+
 function getTagChipSx(tag: string) {
   const normalizedTag = tag.toLowerCase();
 
@@ -123,14 +136,19 @@ export function CisspStudyLogPage({
   initialTotalEntries,
   completedChapters
 }: CisspStudyLogPageProps) {
-  const [domainFilter, setDomainFilter] = useState<DomainFilter>('all');
-  const [chapterFilter, setChapterFilter] = useState<ChapterFilter>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isAutoDomainFromChapter, setIsAutoDomainFromChapter] = useState(false);
+  const [filters, setFilters] = useState<FiltersState>({
+    domain: 'all',
+    chapter: 'all',
+    query: ''
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const [allEntries, setAllEntries] = useState<CisspEntry[] | null>(null);
   const [isLoadingEntries, setIsLoadingEntries] = useState(false);
   const entriesPromiseRef = useRef<Promise<CisspEntry[]> | null>(null);
+
+  const normalizedSearchQuery = filters.query.trim().toLowerCase();
+  const isDefaultUnfilteredView =
+    filters.domain === 'all' && filters.chapter === 'all' && normalizedSearchQuery.length === 0;
 
   const ensureAllEntriesLoaded = useCallback(async () => {
     if (allEntries) {
@@ -149,104 +167,97 @@ export function CisspStudyLogPage({
     return loadedEntries;
   }, [allEntries]);
 
-  const availableChapters = useMemo(() => {
-    if (domainFilter === 'all') {
-      return Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1);
-    }
-
-    return DOMAIN_TO_CHAPTERS[domainFilter] ?? [];
-  }, [domainFilter]);
-
-  const isDefaultUnfilteredView =
-    domainFilter === 'all' && chapterFilter === 'all' && searchQuery.trim().length === 0;
+  const shouldLoadAllEntries = !isDefaultUnfilteredView || currentPage > 1;
 
   useEffect(() => {
-    if (chapterFilter === 'all') {
-      setIsAutoDomainFromChapter(false);
-      return;
-    }
-
-    if (!availableChapters.includes(chapterFilter)) {
-      setChapterFilter('all');
-      setIsAutoDomainFromChapter(false);
-    }
-  }, [availableChapters, chapterFilter]);
-
-  useEffect(() => {
-    if ((!isDefaultUnfilteredView || currentPage > 1) && !allEntries) {
+    if (shouldLoadAllEntries && !allEntries) {
       void ensureAllEntriesLoaded();
     }
-  }, [allEntries, currentPage, ensureAllEntriesLoaded, isDefaultUnfilteredView]);
+  }, [allEntries, ensureAllEntriesLoaded, shouldLoadAllEntries]);
+
+  const chaptersInSelectedDomain = useMemo(() => {
+    if (filters.domain === 'all') {
+      return ALL_CHAPTERS;
+    }
+
+    return DOMAIN_TO_CHAPTERS[filters.domain] ?? [];
+  }, [filters.domain]);
+
+  const hasActiveFilters =
+    filters.domain !== 'all' || filters.chapter !== 'all' || normalizedSearchQuery.length > 0;
 
   const handleDomainChange = (nextDomain: DomainFilter) => {
-    setDomainFilter(nextDomain);
-    setIsAutoDomainFromChapter(false);
+    setFilters((prev) => {
+      if (prev.domain === nextDomain) {
+        return prev;
+      }
 
-    if (nextDomain === 'all') {
-      setChapterFilter('all');
-    }
+      const shouldClearChapter =
+        nextDomain !== 'all' &&
+        prev.chapter !== 'all' &&
+        !(DOMAIN_TO_CHAPTERS[nextDomain] ?? []).includes(prev.chapter);
+
+      setCurrentPage(1);
+      return {
+        ...prev,
+        domain: nextDomain,
+        chapter: shouldClearChapter ? 'all' : prev.chapter
+      };
+    });
   };
 
   const handleChapterChange = (nextChapter: ChapterFilter) => {
-    setChapterFilter(nextChapter);
-
-    if (nextChapter === 'all') {
-      setIsAutoDomainFromChapter(false);
-      return;
-    }
-
-    if (domainFilter === 'all') {
-      const mappedDomain = getDomainsForChapters([nextChapter])[0];
-      if (mappedDomain) {
-        setDomainFilter(mappedDomain);
-        setIsAutoDomainFromChapter(true);
+    setFilters((prev) => {
+      if (prev.chapter === nextChapter) {
+        return prev;
       }
-    }
+
+      setCurrentPage(1);
+      return { ...prev, chapter: nextChapter };
+    });
   };
 
-  const chapterCoverageChapters = useMemo(() => {
-    if (isAutoDomainFromChapter && chapterFilter !== 'all') {
-      return [chapterFilter];
-    }
+  const handleSearchChange = (nextQuery: string) => {
+    setFilters((prev) => {
+      if (prev.query === nextQuery) {
+        return prev;
+      }
 
-    return availableChapters;
-  }, [availableChapters, chapterFilter, isAutoDomainFromChapter]);
-
-  const hasActiveFilters =
-    domainFilter !== 'all' || chapterFilter !== 'all' || searchQuery.trim().length > 0;
+      setCurrentPage(1);
+      return { ...prev, query: nextQuery };
+    });
+  };
 
   const handleClearFilters = () => {
-    setDomainFilter('all');
-    setChapterFilter('all');
-    setSearchQuery('');
-    setIsAutoDomainFromChapter(false);
+    setFilters((prev) => {
+      if (prev.domain === 'all' && prev.chapter === 'all' && prev.query.length === 0) {
+        return prev;
+      }
+
+      setCurrentPage(1);
+      return { domain: 'all', chapter: 'all', query: '' };
+    });
   };
 
   const filteredEntries = useMemo(() => {
-    if (!allEntries) {
-      return isDefaultUnfilteredView ? initialEntries : [];
-    }
+    const entries = allEntries ?? (isDefaultUnfilteredView ? initialEntries : []);
 
-    const normalizedQuery = searchQuery.trim().toLowerCase();
-
-    return allEntries.filter((entry) => {
-      if (domainFilter !== 'all') {
-        const matchesDomain = entry.chapters.some((chapter) =>
-          (DOMAIN_TO_CHAPTERS[domainFilter] ?? []).includes(chapter)
-        );
-
+    return entries.filter((entry) => {
+      if (filters.domain !== 'all') {
+        const chaptersInDomain = DOMAIN_TO_CHAPTERS[filters.domain] ?? [];
+        const matchesDomain = entry.chapters.some((chapter) => chaptersInDomain.includes(chapter));
         if (!matchesDomain) {
           return false;
         }
       }
 
-      if (chapterFilter !== 'all' && !entry.chapters.includes(chapterFilter)) {
+      if (filters.chapter !== 'all' && !entry.chapters.includes(filters.chapter)) {
         return false;
       }
 
-      return doesEntryMatchSearch(entry, normalizedQuery);
+      return doesEntryMatchSearch(entry, normalizedSearchQuery);
     });
-  }, [allEntries, chapterFilter, domainFilter, initialEntries, isDefaultUnfilteredView, searchQuery]);
+  }, [allEntries, filters.chapter, filters.domain, initialEntries, isDefaultUnfilteredView, normalizedSearchQuery]);
 
   const totalEntries = allEntries
     ? filteredEntries.length
@@ -255,96 +266,88 @@ export function CisspStudyLogPage({
       : 0;
 
   const totalPages = Math.max(1, Math.ceil(totalEntries / ENTRIES_PER_PAGE));
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
 
   const paginatedEntries = useMemo(() => {
     if (!allEntries) {
-      return isDefaultUnfilteredView && currentPage === 1 ? initialEntries : [];
+      return isDefaultUnfilteredView && safeCurrentPage === 1 ? initialEntries : [];
     }
 
-    const start = (currentPage - 1) * ENTRIES_PER_PAGE;
+    const start = (safeCurrentPage - 1) * ENTRIES_PER_PAGE;
     return filteredEntries.slice(start, start + ENTRIES_PER_PAGE);
-  }, [allEntries, currentPage, filteredEntries, initialEntries, isDefaultUnfilteredView]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [chapterFilter, domainFilter, searchQuery]);
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages);
-    }
-  }, [currentPage, totalPages]);
+  }, [allEntries, filteredEntries, initialEntries, isDefaultUnfilteredView, safeCurrentPage]);
 
   const progressValue = (completedChapters.length / TOTAL_CHAPTERS) * 100;
 
-  const paginationControls = totalEntries > 0 ? (
-    <Box
-      sx={(theme) => ({
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 3,
-        px: { xs: 1.5, sm: 2 },
-        py: 1.5,
-        background: theme.palette.mode === 'dark'
-          ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
-          : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
-      })}
-    >
-      <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        spacing={1.5}
-        justifyContent="space-between"
-        alignItems={{ xs: 'stretch', sm: 'center' }}
+  const rangeStart = totalEntries === 0 ? 0 : (safeCurrentPage - 1) * ENTRIES_PER_PAGE + 1;
+  const rangeEnd = totalEntries === 0 ? 0 : Math.min(safeCurrentPage * ENTRIES_PER_PAGE, totalEntries);
+
+  const renderPaginationSection = (positionLabel: string) => {
+    if (totalEntries === 0) {
+      return null;
+    }
+
+    return (
+      <Card
+        aria-label={`${positionLabel} pagination`}
+        sx={{
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          minWidth: 0,
+          borderRadius: 3,
+          background: (theme) =>
+            theme.palette.mode === 'dark'
+              ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
+              : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
+        }}
       >
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ textAlign: { xs: 'center', sm: 'left' } }}
-        >
-          Page {currentPage} of {totalPages}
-        </Typography>
-        <Stack direction="row" spacing={1} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="medium"
-            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-            disabled={currentPage === 1 || isLoadingEntries}
-            sx={{
-              minWidth: { xs: 0, sm: 116 },
-              flex: { xs: 1, sm: 'unset' },
-              borderRadius: 999,
-              boxShadow: 'none',
-              '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
-              '&:disabled': { opacity: 0.6 }
-            }}
+        <CardContent sx={{ py: 1.75 }}>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1.5}
+            alignItems={{ xs: 'flex-start', sm: 'center' }}
+            justifyContent="space-between"
           >
-            ← Previous
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            size="medium"
-            onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-            disabled={currentPage === totalPages || isLoadingEntries}
-            sx={{
-              minWidth: { xs: 0, sm: 96 },
-              flex: { xs: 1, sm: 'unset' },
-              borderRadius: 999,
-              boxShadow: 'none',
-              '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
-              '&:disabled': { opacity: 0.6 }
-            }}
-          >
-            Next →
-          </Button>
-        </Stack>
-      </Stack>
-    </Box>
-  ) : null;
+            <Typography variant="body2" color="text.secondary">
+              Showing {rangeStart}-{rangeEnd} of {totalEntries} entries
+            </Typography>
+            {totalPages > 1 ? (
+              <Pagination
+                count={totalPages}
+                page={safeCurrentPage}
+                color="primary"
+                shape="rounded"
+                onChange={(_, page) => setCurrentPage(page)}
+                disabled={isLoadingEntries}
+                siblingCount={0}
+                boundaryCount={1}
+              />
+            ) : null}
+          </Stack>
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
-    <Stack spacing={4} className="section-enter" sx={{ py: { xs: 4, md: 5 } }}>
-      <Box component="header" sx={{ maxWidth: 860 }}>
+    <Stack
+      spacing={1}
+      className="section-enter"
+      sx={{
+        py: { xs: 4, md: 5 },
+        px: { xs: 2, sm: 3, md: 0 },
+        width: '100%',
+        maxWidth: '100%',
+        boxSizing: 'border-box',
+        minWidth: 0,
+        overflowX: 'hidden'
+      }}
+    >
+      <Box
+        component="header"
+        sx={{ width: '100%', maxWidth: 860, boxSizing: 'border-box', minWidth: 0 }}
+      >
         <Typography component="h1" variant="h3" gutterBottom>
           CISSP Study Log
         </Typography>
@@ -354,198 +357,249 @@ export function CisspStudyLogPage({
         </Typography>
       </Box>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={1.5}>
-            <Typography variant="h6" component="h2">
-              Progress
-            </Typography>
-            <Typography color="text.secondary">
-              {`${completedChapters.length} / ${TOTAL_CHAPTERS} chapters logged`}
-            </Typography>
-            <LinearProgress
-              variant="determinate"
-              value={progressValue}
-              aria-label={`${completedChapters.length} of ${TOTAL_CHAPTERS} chapters logged`}
-            />
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent>
-          <Stack spacing={2.5}>
-            <Typography variant="h6" component="h2">
-              Filters
-            </Typography>
-            <Box sx={{ px: { xs: 1, sm: 0 } }}>
-              <Grid container spacing={2} alignItems="stretch">
-                <Grid item xs={12} md={3}>
-                  <FormControl fullWidth>
-                    <InputLabel id="domain-filter-label">Domain</InputLabel>
-                    <Select
-                      labelId="domain-filter-label"
-                      value={domainFilter}
-                      label="Domain"
-                      onChange={(event) =>
-                        handleDomainChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
-                      }
-                    >
-                      <MenuItem value="all">All domains</MenuItem>
-                      {Array.from({ length: 8 }, (_, index) => index + 1).map((domain) => (
-                        <MenuItem key={domain} value={domain}>
-                          {getDomainLabel(domain)}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12} md={3}>
-                  <FormControl fullWidth>
-                    <InputLabel id="chapter-filter-label">Chapter</InputLabel>
-                    <Select
-                      labelId="chapter-filter-label"
-                      value={chapterFilter}
-                      label="Chapter"
-                      onChange={(event) =>
-                        handleChapterChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
-                      }
-                    >
-                      <MenuItem value="all">All chapters</MenuItem>
-                      {availableChapters.map((chapter) => (
-                        <MenuItem key={chapter} value={chapter}>
-                          {getChapterLabel(chapter)}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12} md={3}>
-                  <TextField
-                    fullWidth
-                    label="Search notes or tags"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleClearFilters}
-                    disabled={!hasActiveFilters}
-                    sx={{ textTransform: 'none', px: 1.75 }}
-                  >
-                    Clear filters
-                  </Button>
-                </Grid>
-              </Grid>
-            </Box>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <Typography variant="h6" component="h2">
-              Chapter Coverage
-            </Typography>
-            <Typography color="text.secondary">
-              Click any chapter to filter entries by that chapter.
-            </Typography>
-            <Grid container spacing={1}>
-              {chapterCoverageChapters.map((chapter) => {
-                const completed = completedChapters.includes(chapter);
-                const selected = chapterFilter === chapter;
-
-                return (
-                  <Grid item key={chapter}>
-                    <Chip
-                      label={chapter}
-                      clickable
-                      onClick={() => handleChapterChange(chapterFilter === chapter ? 'all' : chapter)}
-                      color={selected ? 'primary' : completed ? 'secondary' : 'default'}
-                      variant={selected || completed ? 'filled' : 'outlined'}
-                      aria-label={`Filter by ${getChapterLabel(chapter)}`}
-                      title={getChapterLabel(chapter)}
-                    />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      {paginationControls}
-
-      <Stack spacing={2} component="section" aria-label="Study entries">
-        {paginatedEntries.map((entry) => {
-          const derivedDomains = getDomainsForChapters(entry.chapters);
-
-          return (
-            <Card key={entry.id} className="card-lift section-enter">
+      <Grid
+        container
+        rowSpacing={3}
+        columnSpacing={{ xs: 0, lg: 3 }}
+        alignItems="flex-start"
+        sx={{ m: 0, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+      >
+        <Grid item xs={12} lg={4} sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}>
+          <Stack
+            spacing={3}
+            sx={{ position: { lg: 'sticky' }, top: { lg: 24 }, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+          >
+            <Card>
               <CardContent>
-                <Stack spacing={1.6}>
-                  <Typography variant="subtitle2" color="text.secondary">
-                    {entry.date}
+                <Stack spacing={1.5}>
+                  <Typography variant="h6" component="h2">
+                    Progress
                   </Typography>
-
-                  <Typography>
-                    <strong>Chapters:</strong>{' '}
-                    {entry.chapters.map((chapter) => getChapterLabel(chapter)).join(' • ')}
+                  <Typography color="text.secondary">
+                    {`${completedChapters.length} / ${TOTAL_CHAPTERS} chapters logged`}
                   </Typography>
-
-                  <Typography>
-                    <strong>Domains:</strong>{' '}
-                    {derivedDomains.length > 0
-                      ? derivedDomains.map((domain) => getDomainLabel(domain)).join(' • ')
-                      : 'No mapped domain'}
-                  </Typography>
-
-                  <Typography>{entry.notes}</Typography>
-
-                  {entry.tags && entry.tags.length > 0 ? (
-                    <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                      {entry.tags.map((tag) => (
-                        <Chip
-                          key={`${entry.id}-${tag}`}
-                          label={tag}
-                          size="small"
-                          variant="outlined"
-                          sx={getTagChipSx(tag)}
-                        />
-                      ))}
-                    </Stack>
-                  ) : null}
+                  <LinearProgress
+                    variant="determinate"
+                    value={progressValue}
+                    aria-label={`${completedChapters.length} of ${TOTAL_CHAPTERS} chapters logged`}
+                  />
                 </Stack>
               </CardContent>
             </Card>
-          );
-        })}
 
-        {filteredEntries.length === 0 && !isLoadingEntries ? (
-          <Card>
-            <CardContent>
-              <Typography color="text.secondary">
-                No entries match your current filters.
-              </Typography>
-            </CardContent>
-          </Card>
-        ) : null}
+            <Card>
+              <CardContent>
+                <Stack spacing={2.5}>
+                  <Typography variant="h6" component="h2">
+                    Filters
+                  </Typography>
+                  <Stack spacing={2}>
+                    <FormControl fullWidth>
+                      <InputLabel id="domain-filter-label">Domain</InputLabel>
+                      <Select
+                        labelId="domain-filter-label"
+                        value={filters.domain}
+                        label="Domain"
+                        onChange={(event) =>
+                          handleDomainChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
+                        }
+                      >
+                        <MenuItem value="all">All domains</MenuItem>
+                        {ALL_DOMAINS.map((domain) => (
+                          <MenuItem key={domain} value={domain}>
+                            {getDomainOptionLabel(domain)}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-        {isLoadingEntries && paginatedEntries.length === 0 ? (
-          <Card>
-            <CardContent>
-              <Typography color="text.secondary">Loading full study log…</Typography>
-            </CardContent>
-          </Card>
-        ) : null}
-      </Stack>
+                    <FormControl fullWidth>
+                      <InputLabel id="chapter-filter-label">Chapter</InputLabel>
+                      <Select
+                        labelId="chapter-filter-label"
+                        value={filters.chapter}
+                        label="Chapter"
+                        onChange={(event) =>
+                          handleChapterChange(event.target.value === 'all' ? 'all' : Number(event.target.value))
+                        }
+                      >
+                        <MenuItem value="all">All chapters</MenuItem>
+                        {chaptersInSelectedDomain.map((chapter) => (
+                          <MenuItem key={chapter} value={chapter}>
+                            {getChapterLabel(chapter)}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <TextField
+                      fullWidth
+                      label="Search notes or tags"
+                      value={filters.query}
+                      onChange={(event) => handleSearchChange(event.target.value)}
+                    />
+
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleClearFilters}
+                      disabled={!hasActiveFilters}
+                      sx={{ textTransform: 'none', alignSelf: 'flex-start', px: 1.75 }}
+                    >
+                      Clear filters
+                    </Button>
+                  </Stack>
+                </Stack>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent>
+                <Stack spacing={2}>
+                  <Typography variant="h6" component="h2">
+                    Chapter Coverage
+                  </Typography>
+                  <Typography color="text.secondary" variant="body2">
+                    Click any chapter to filter entries by chapter.
+                  </Typography>
+                  <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                    {chaptersInSelectedDomain.map((chapter) => {
+                      const completed = completedChapters.includes(chapter);
+                      const selected = filters.chapter === chapter;
+
+                      return (
+                        <Chip
+                          key={chapter}
+                          label={chapter}
+                          clickable
+                          onClick={() => handleChapterChange(filters.chapter === chapter ? 'all' : chapter)}
+                          color={selected ? 'primary' : completed ? 'secondary' : 'default'}
+                          variant={selected || completed ? 'filled' : 'outlined'}
+                          aria-label={`Filter by ${getChapterLabel(chapter)}`}
+                          title={getChapterLabel(chapter)}
+                        />
+                      );
+                    })}
+                  </Stack>
+                </Stack>
+              </CardContent>
+            </Card>
+          </Stack>
+        </Grid>
+
+        <Grid item xs={12} lg={8} sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}>
+          <Stack
+            spacing={2.5}
+            component="section"
+            aria-label="Study entries"
+            sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+          >
+            {renderPaginationSection('Top')}
+
+            {paginatedEntries.map((entry) => {
+              const derivedDomains = getDomainsForChapters(entry.chapters);
+
+              return (
+                <Card
+                  key={entry.id}
+                  className="card-lift section-enter"
+                  sx={{ borderRadius: 3, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+                >
+                  <CardContent sx={{ p: { xs: 2, sm: 2.5 } }}>
+                    <Stack spacing={1.8}>
+                      <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={1}
+                        justifyContent="space-between"
+                        alignItems={{ xs: 'flex-start', sm: 'center' }}
+                      >
+                        <Typography variant="subtitle2" color="text.secondary" sx={{ letterSpacing: 0.2 }}>
+                          {entry.date}
+                        </Typography>
+                        {entry.tags && entry.tags.length > 0 ? (
+                          <Stack direction="row" spacing={0.75} useFlexGap flexWrap="wrap" justifyContent="flex-end">
+                            {entry.tags.map((tag) => (
+                              <Chip
+                                key={`${entry.id}-${tag}`}
+                                label={tag}
+                                size="small"
+                                variant="outlined"
+                                sx={getTagChipSx(tag)}
+                              />
+                            ))}
+                          </Stack>
+                        ) : null}
+                      </Stack>
+
+                      <Stack spacing={1}>
+                        <Typography variant="caption" color="text.secondary">
+                          Chapters
+                        </Typography>
+                        <Stack direction="row" spacing={0.75} useFlexGap flexWrap="wrap">
+                          {entry.chapters.map((chapter) => (
+                            <Chip
+                              key={`${entry.id}-chapter-${chapter}`}
+                              label={`Ch ${chapter}`}
+                              size="small"
+                              variant="outlined"
+                              title={getChapterLabel(chapter)}
+                            />
+                          ))}
+                        </Stack>
+                      </Stack>
+
+                      <Stack spacing={1}>
+                        <Typography variant="caption" color="text.secondary">
+                          Domains
+                        </Typography>
+                        <Stack direction="row" spacing={0.75} useFlexGap flexWrap="wrap">
+                          {derivedDomains.length > 0 ? (
+                            derivedDomains.map((domain) => (
+                              <Chip
+                                key={`${entry.id}-domain-${domain}`}
+                                label={`D${domain}`}
+                                size="small"
+                                color="primary"
+                                variant="outlined"
+                                title={getDomainLabel(domain)}
+                              />
+                            ))
+                          ) : (
+                            <Chip label="No mapped domain" size="small" variant="outlined" />
+                          )}
+                        </Stack>
+                      </Stack>
+
+                      <Typography sx={{ whiteSpace: 'pre-wrap' }}>{entry.notes}</Typography>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              );
+            })}
+
+            {totalEntries === 0 && !isLoadingEntries ? (
+              <Card>
+                <CardContent>
+                  <Typography color="text.secondary">
+                    No entries match your current filters.
+                  </Typography>
+                </CardContent>
+              </Card>
+            ) : null}
+
+            {isLoadingEntries && paginatedEntries.length === 0 ? (
+              <Card>
+                <CardContent>
+                  <Typography color="text.secondary">Loading full study log…</Typography>
+                </CardContent>
+              </Card>
+            ) : null}
+
+            {renderPaginationSection('Bottom')}
+          </Stack>
+        </Grid>
+      </Grid>
     </Stack>
   );
 }

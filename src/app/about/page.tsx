@@ -56,6 +56,21 @@ const sections = [
   }
 ] satisfies Array<{ title: string; icon: ReactNode; content: string }>;
 
+const profileHighlights = [
+  {
+    label: 'Greater Vancouver, BC',
+    icon: <PlaceOutlinedIcon fontSize="small" color="primary" />
+  },
+  {
+    label: 'AI Security & Privacy',
+    icon: <SecurityOutlinedIcon fontSize="small" color="primary" />
+  },
+  {
+    label: 'CISSP (in progress)',
+    icon: <TrackChangesOutlinedIcon fontSize="small" color="primary" />
+  }
+] satisfies Array<{ label: string; icon: ReactNode }>;
+
 export default function AboutPage() {
   return (
     <Section>
@@ -95,26 +110,25 @@ export default function AboutPage() {
             <Card>
               <CardContent sx={{ py: 3 }}>
                 <Stack spacing={2.5} alignItems="center" textAlign="center">
-
-                <Box
-                  sx={{
-                    width: 180,
-                    height: 180,
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '2px solid',
-                    borderColor: 'divider',
-                    position: 'relative'
-                  }}
-                >
-                  <Image
-                    src="/images/headshot-avatar.webp"
-                    alt="Trevor Lee headshot"
-                    fill
-                    sizes="180px"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </Box>
+                  <Box
+                    sx={{
+                      width: 180,
+                      height: 180,
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      border: '2px solid',
+                      borderColor: 'divider',
+                      position: 'relative'
+                    }}
+                  >
+                    <Image
+                      src="/images/headshot-avatar.webp"
+                      alt="Trevor Lee headshot"
+                      fill
+                      sizes="180px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </Box>
 
                   <Stack spacing={0.5}>
                     <Typography variant="h6">Trevor Lee</Typography>
@@ -131,28 +145,20 @@ export default function AboutPage() {
                   <Divider flexItem sx={{ my: 1 }} />
 
                   <Stack spacing={1.25} sx={{ width: '100%' }}>
-
-                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
-                      <PlaceOutlinedIcon fontSize="small" color="primary" />
-                      <Typography variant="body2" color="text.secondary">
-                        Greater Vancouver, BC
-                      </Typography>
-                    </Stack>
-
-                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
-                      <SecurityOutlinedIcon fontSize="small" color="primary" />
-                      <Typography variant="body2" color="text.secondary">
-                        AI Security & Privacy
-                      </Typography>
-                    </Stack>
-
-                    <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
-                      <TrackChangesOutlinedIcon fontSize="small" color="primary" />
-                      <Typography variant="body2" color="text.secondary">
-                        CISSP (in progress)
-                      </Typography>
-                    </Stack>
-
+                    {profileHighlights.map((highlight) => (
+                      <Stack
+                        key={highlight.label}
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        {highlight.icon}
+                        <Typography variant="body2" color="text.secondary">
+                          {highlight.label}
+                        </Typography>
+                      </Stack>
+                    ))}
                   </Stack>
                 </Stack>
               </CardContent>

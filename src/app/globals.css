@@ -41,6 +41,17 @@ html[data-color-mode='dark'] .MuiTypography-root {
   color: inherit;
 }
 
+html[data-theme-booting='true'] *,
+html[data-theme-booting='true'] *::before,
+html[data-theme-booting='true'] *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+html[data-theme-booting='true'] body {
+  visibility: hidden;
+}
+
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
