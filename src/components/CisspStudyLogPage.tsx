@@ -1,10 +1,6 @@
 'use client';
 
 import {
-  ChevronLeftRounded,
-  ChevronRightRounded
-} from '@mui/icons-material';
-import {
   Box,
   Button,
   Card,
@@ -21,19 +17,23 @@ import {
   Typography
 } from '@mui/material';
 import type { Theme } from '@mui/material/styles';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
-  cisspEntries,
   DOMAIN_TO_CHAPTERS,
   getDomainsForChapters,
-  getUniqueCompletedChapters,
-  TOTAL_CHAPTERS
-} from '@/utils/cissp';
-import type { CisspEntry } from '@/utils/cissp';
+  TOTAL_CHAPTERS,
+  type CisspEntry
+} from '@/utils/cisspCore';
 
 type DomainFilter = 'all' | number;
 type ChapterFilter = 'all' | number;
+
+type CisspStudyLogPageProps = {
+  initialEntries: CisspEntry[];
+  initialTotalEntries: number;
+  completedChapters: number[];
+};
 
 const STUDY_SOURCE_TITLE =
   'The ISC2 CISSP Official Study Guide, 10th Edition';
@@ -118,14 +118,37 @@ function getTagChipSx(tag: string) {
   };
 }
 
-export function CisspStudyLogPage() {
+export function CisspStudyLogPage({
+  initialEntries,
+  initialTotalEntries,
+  completedChapters
+}: CisspStudyLogPageProps) {
   const [domainFilter, setDomainFilter] = useState<DomainFilter>('all');
   const [chapterFilter, setChapterFilter] = useState<ChapterFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAutoDomainFromChapter, setIsAutoDomainFromChapter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [allEntries, setAllEntries] = useState<CisspEntry[] | null>(null);
+  const [isLoadingEntries, setIsLoadingEntries] = useState(false);
+  const entriesPromiseRef = useRef<Promise<CisspEntry[]> | null>(null);
 
-  const completedChapters = useMemo(() => getUniqueCompletedChapters(cisspEntries), []);
+  const ensureAllEntriesLoaded = useCallback(async () => {
+    if (allEntries) {
+      return allEntries;
+    }
+
+    if (!entriesPromiseRef.current) {
+      setIsLoadingEntries(true);
+      entriesPromiseRef.current = import('@/utils/cisspData')
+        .then((module) => module.cisspEntries)
+        .finally(() => setIsLoadingEntries(false));
+    }
+
+    const loadedEntries = await entriesPromiseRef.current;
+    setAllEntries(loadedEntries);
+    return loadedEntries;
+  }, [allEntries]);
+
   const availableChapters = useMemo(() => {
     if (domainFilter === 'all') {
       return Array.from({ length: TOTAL_CHAPTERS }, (_, index) => index + 1);
@@ -133,6 +156,9 @@ export function CisspStudyLogPage() {
 
     return DOMAIN_TO_CHAPTERS[domainFilter] ?? [];
   }, [domainFilter]);
+
+  const isDefaultUnfilteredView =
+    domainFilter === 'all' && chapterFilter === 'all' && searchQuery.trim().length === 0;
 
   useEffect(() => {
     if (chapterFilter === 'all') {
@@ -145,6 +171,12 @@ export function CisspStudyLogPage() {
       setIsAutoDomainFromChapter(false);
     }
   }, [availableChapters, chapterFilter]);
+
+  useEffect(() => {
+    if ((!isDefaultUnfilteredView || currentPage > 1) && !allEntries) {
+      void ensureAllEntriesLoaded();
+    }
+  }, [allEntries, currentPage, ensureAllEntriesLoaded, isDefaultUnfilteredView]);
 
   const handleDomainChange = (nextDomain: DomainFilter) => {
     setDomainFilter(nextDomain);
@@ -191,9 +223,13 @@ export function CisspStudyLogPage() {
   };
 
   const filteredEntries = useMemo(() => {
+    if (!allEntries) {
+      return isDefaultUnfilteredView ? initialEntries : [];
+    }
+
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return cisspEntries.filter((entry) => {
+    return allEntries.filter((entry) => {
       if (domainFilter !== 'all') {
         const matchesDomain = entry.chapters.some((chapter) =>
           (DOMAIN_TO_CHAPTERS[domainFilter] ?? []).includes(chapter)
@@ -210,13 +246,24 @@ export function CisspStudyLogPage() {
 
       return doesEntryMatchSearch(entry, normalizedQuery);
     });
-  }, [chapterFilter, domainFilter, searchQuery]);
+  }, [allEntries, chapterFilter, domainFilter, initialEntries, isDefaultUnfilteredView, searchQuery]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredEntries.length / ENTRIES_PER_PAGE));
+  const totalEntries = allEntries
+    ? filteredEntries.length
+    : isDefaultUnfilteredView
+      ? initialTotalEntries
+      : 0;
+
+  const totalPages = Math.max(1, Math.ceil(totalEntries / ENTRIES_PER_PAGE));
+
   const paginatedEntries = useMemo(() => {
+    if (!allEntries) {
+      return isDefaultUnfilteredView && currentPage === 1 ? initialEntries : [];
+    }
+
     const start = (currentPage - 1) * ENTRIES_PER_PAGE;
     return filteredEntries.slice(start, start + ENTRIES_PER_PAGE);
-  }, [currentPage, filteredEntries]);
+  }, [allEntries, currentPage, filteredEntries, initialEntries, isDefaultUnfilteredView]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -229,6 +276,71 @@ export function CisspStudyLogPage() {
   }, [currentPage, totalPages]);
 
   const progressValue = (completedChapters.length / TOTAL_CHAPTERS) * 100;
+
+  const paginationControls = totalEntries > 0 ? (
+    <Box
+      sx={(theme) => ({
+        border: `1px solid ${theme.palette.divider}`,
+        borderRadius: 3,
+        px: { xs: 1.5, sm: 2 },
+        py: 1.5,
+        background: theme.palette.mode === 'dark'
+          ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
+          : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
+      })}
+    >
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={1.5}
+        justifyContent="space-between"
+        alignItems={{ xs: 'stretch', sm: 'center' }}
+      >
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ textAlign: { xs: 'center', sm: 'left' } }}
+        >
+          Page {currentPage} of {totalPages}
+        </Typography>
+        <Stack direction="row" spacing={1} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="medium"
+            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+            disabled={currentPage === 1 || isLoadingEntries}
+            sx={{
+              minWidth: { xs: 0, sm: 116 },
+              flex: { xs: 1, sm: 'unset' },
+              borderRadius: 999,
+              boxShadow: 'none',
+              '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
+              '&:disabled': { opacity: 0.6 }
+            }}
+          >
+            ← Previous
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            size="medium"
+            onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+            disabled={currentPage === totalPages || isLoadingEntries}
+            sx={{
+              minWidth: { xs: 0, sm: 96 },
+              flex: { xs: 1, sm: 'unset' },
+              borderRadius: 999,
+              boxShadow: 'none',
+              '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
+              '&:disabled': { opacity: 0.6 }
+            }}
+          >
+            Next →
+          </Button>
+        </Stack>
+      </Stack>
+    </Box>
+  ) : null;
 
   return (
     <Stack spacing={4} className="section-enter" sx={{ py: { xs: 4, md: 5 } }}>
@@ -369,6 +481,8 @@ export function CisspStudyLogPage() {
         </CardContent>
       </Card>
 
+      {paginationControls}
+
       <Stack spacing={2} component="section" aria-label="Study entries">
         {paginatedEntries.map((entry) => {
           const derivedDomains = getDomainsForChapters(entry.chapters);
@@ -414,7 +528,7 @@ export function CisspStudyLogPage() {
           );
         })}
 
-        {filteredEntries.length === 0 ? (
+        {filteredEntries.length === 0 && !isLoadingEntries ? (
           <Card>
             <CardContent>
               <Typography color="text.secondary">
@@ -424,71 +538,12 @@ export function CisspStudyLogPage() {
           </Card>
         ) : null}
 
-        {filteredEntries.length > 0 ? (
-          <Box
-            sx={(theme) => ({
-              border: `1px solid ${theme.palette.divider}`,
-              borderRadius: 3,
-              px: { xs: 1.5, sm: 2 },
-              py: 1.5,
-              background: theme.palette.mode === 'dark'
-                ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
-                : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
-            })}
-          >
-            <Stack
-              direction={{ xs: 'column', sm: 'row' }}
-              spacing={1.5}
-              justifyContent="space-between"
-              alignItems={{ xs: 'stretch', sm: 'center' }}
-            >
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ textAlign: { xs: 'center', sm: 'left' } }}
-              >
-                Page {currentPage} of {totalPages}
-              </Typography>
-              <Stack direction="row" spacing={1} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="medium"
-                  startIcon={<ChevronLeftRounded />}
-                  onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-                  disabled={currentPage === 1}
-                  sx={{
-                    minWidth: { xs: 0, sm: 116 },
-                    flex: { xs: 1, sm: 'unset' },
-                    borderRadius: 999,
-                    boxShadow: 'none',
-                    '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
-                    '&:disabled': { opacity: 0.6 }
-                  }}
-                >
-                  Previous
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="medium"
-                  endIcon={<ChevronRightRounded />}
-                  onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-                  disabled={currentPage === totalPages}
-                  sx={{
-                    minWidth: { xs: 0, sm: 96 },
-                    flex: { xs: 1, sm: 'unset' },
-                    borderRadius: 999,
-                    boxShadow: 'none',
-                    '&:hover': { boxShadow: 'none', transform: 'translateY(-1px)' },
-                    '&:disabled': { opacity: 0.6 }
-                  }}
-                >
-                  Next
-                </Button>
-              </Stack>
-            </Stack>
-          </Box>
+        {isLoadingEntries && paginatedEntries.length === 0 ? (
+          <Card>
+            <CardContent>
+              <Typography color="text.secondary">Loading full study log…</Typography>
+            </CardContent>
+          </Card>
         ) : null}
       </Stack>
     </Stack>

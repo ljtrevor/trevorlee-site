@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { CisspStudyLogPage } from '@/components/CisspStudyLogPage';
+import { cisspEntries, getUniqueCompletedChapters } from '@/utils/cissp';
 
 export const metadata: Metadata = {
   title: 'CISSP Study Log',
@@ -22,5 +23,11 @@ export const metadata: Metadata = {
 };
 
 export default function CisspPage() {
-  return <CisspStudyLogPage />;
+  return (
+    <CisspStudyLogPage
+      initialEntries={cisspEntries.slice(0, 5)}
+      initialTotalEntries={cisspEntries.length}
+      completedChapters={getUniqueCompletedChapters(cisspEntries)}
+    />
+  );
 }

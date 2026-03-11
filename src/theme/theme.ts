@@ -50,7 +50,7 @@ export function getSiteTheme(mode: SiteThemeMode) {
       borderRadius: 14
     },
     typography: {
-      fontFamily: 'var(--font-sans), var(--font-japanese), sans-serif',
+      fontFamily: 'var(--font-sans), sans-serif',
       h1: {
         fontWeight: 600,
         letterSpacing: '-0.02em'

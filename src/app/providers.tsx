@@ -8,7 +8,7 @@ import { ColorModeContext, COLOR_MODE_STORAGE_KEY } from '@/theme/colorMode';
 import { getSiteTheme, type SiteThemeMode } from '@/theme/theme';
 
 export function Providers({ children }: PropsWithChildren) {
-  // Keep the first client render aligned with SSR to prevent hydration mismatches.
+  // Keep the initial render aligned with SSR, then switch to preferred mode immediately after mount.
   const [mode, setMode] = useState<SiteThemeMode>('light');
 
   useEffect(() => {
@@ -23,6 +23,22 @@ export function Providers({ children }: PropsWithChildren) {
     document.documentElement.setAttribute('data-color-mode', preferredMode);
     document.documentElement.style.colorScheme = preferredMode;
     setMode(preferredMode);
+
+    // Re-enable transitions/animations after theme mode is applied and painted.
+    let secondFrame: number | null = null;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        document.documentElement.removeAttribute('data-theme-booting');
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (secondFrame !== null) {
+        window.cancelAnimationFrame(secondFrame);
+      }
+      document.documentElement.removeAttribute('data-theme-booting');
+    };
   }, []);
 
   const theme = useMemo(() => getSiteTheme(mode), [mode]);

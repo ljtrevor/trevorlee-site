@@ -108,7 +108,7 @@ export default function AboutPage() {
                   }}
                 >
                   <Image
-                    src="/images/headshot-avatar.jpg"
+                    src="/images/headshot-avatar.webp"
                     alt="Trevor Lee headshot"
                     fill
                     sizes="180px"

@@ -7,7 +7,6 @@ Production-ready personal site built with Next.js App Router, React, TypeScript,
 - React 18 + TypeScript
 - MUI v5 + Emotion
 - Static export for deployment (`output: 'export'`)
-- Optional GA4 via `@next/third-parties/google`
 
 ## Routes
 - `/` Home
@@ -19,8 +18,7 @@ Production-ready personal site built with Next.js App Router, React, TypeScript,
 - Static export enabled in `next.config.js`
 - SEO metadata configured globally + per route
 - `robots.txt` and `sitemap.xml` generated via App Router metadata routes
-- Next font optimization with `next/font/google` (Plus Jakarta Sans + Noto Sans JP)
-- Optional Google Analytics injection via env var
+- Next font optimization with `next/font/google` (Plus Jakarta Sans)
 - Theme mode pre-hydration script to reduce flash and hydration mismatch risk
 - Accessibility improvements including reduced motion support and mobile nav ARIA state
 
@@ -48,16 +46,6 @@ Open `http://localhost:3000`.
 - `npm run lint` Run ESLint
 - `npm run typecheck` Run TypeScript checks (`tsc --noEmit`)
 
-## Environment Variables
-Create `.env.local` as needed.
-
-```bash
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-- If set, GA4 is loaded.
-- If unset, no GA script is injected.
-
 ## CISSP Study Log Data
 Edit entries in:
 - `src/data/cisspLog.json`
@@ -80,6 +68,18 @@ Static artifacts are generated in:
    - `404 -> /index.html` (response `200`)
 4. Attach ACM certificate and point DNS to CloudFront.
 
+### Recommended deploy command (with cache policies)
+Use the included script to apply cache headers that improve Lighthouse performance:
+
+```bash
+./scripts/deploy-static-site.sh <s3-bucket-name> [cloudfront-distribution-id]
+```
+
+What it sets:
+- `/_next/static/*`: `public,max-age=31536000,immutable`
+- `*.html`, `*.xml`, `*.txt`: `public,max-age=0,must-revalidate`
+- other files: `public,max-age=3600`
+
 ## Validation Before Deploy
 ```bash
 npm run lint
@@ -92,4 +92,3 @@ npm run build
 In restricted network environments, Google font downloads can fail during `npm run build`.
 - Verify outbound access in CI/deploy environment.
 - Re-run build in a network with access to Google Fonts endpoints.
-
