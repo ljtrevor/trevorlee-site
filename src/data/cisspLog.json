@@ -334,5 +334,12 @@
     "chapters": [1, 2, 3, 4, 5, 6, 7, 8, 9],
     "notes": "Reviewed concepts and definitions from Chapters 1–9 based on questions I answered incorrectly during the end-of-chapter practice reviews.",
     "tags": ["Review"]
+  },
+  {
+    "id": "2026-03-11",
+    "date": "2026-03-11",
+    "chapters": [10],
+    "notes": "Started Chapter 10 on physical security requirements. Reviewed secure facility planning, critical path analysis, and how infrastructure dependencies like power, environmental controls, and networking support mission-critical systems. Also studied Crime Prevention Through Environmental Design (CPTED) principles and how environmental design combined with traditional controls can help deter and detect physical threats.",
+    "tags": ["Reading", "Notes"]
   }
 ]
