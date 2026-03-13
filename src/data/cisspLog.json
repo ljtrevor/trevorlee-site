@@ -341,5 +341,12 @@
     "chapters": [10],
     "notes": "Started Chapter 10 on physical security requirements. Reviewed secure facility planning, critical path analysis, and how infrastructure dependencies like power, environmental controls, and networking support mission-critical systems. Also studied Crime Prevention Through Environmental Design (CPTED) principles and how environmental design combined with traditional controls can help deter and detect physical threats.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-12",
+    "date": "2026-03-12",
+    "chapters": [10],
+    "notes": "Continued Chapter 10 on physical security controls. Reviewed facility and site security controls including access control systems, alarms, cameras, guards, and layered physical defenses designed to deter, detect, delay, and respond to intrusions. Also studied cable plant security, protected distribution systems (PDS), server room placement, smartcard authentication, and reliability concepts such as MTTF, MTTR, and MTBF related to equipment failure and availability.",
+    "tags": ["Reading", "Notes"]
   }
 ]
