@@ -27,6 +27,8 @@ jobs:
         run: npm ci
 
       - name: Build Next.js static site
+        env:
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
         run: npm run build
 
       - name: Configure AWS credentials via OIDC

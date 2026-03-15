@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Box, Container } from '@mui/material';
@@ -95,6 +96,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </Box>
           <SiteFooter />
         </Providers>
+        {process.env.NEXT_PUBLIC_GA_ID ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        ) : null}
       </body>
     </html>
   );
