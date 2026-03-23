@@ -348,5 +348,26 @@
     "chapters": [10],
     "notes": "Continued Chapter 10 on physical security controls. Reviewed facility and site security controls including access control systems, alarms, cameras, guards, and layered physical defenses designed to deter, detect, delay, and respond to intrusions. Also studied cable plant security, protected distribution systems (PDS), server room placement, smartcard authentication, and reliability concepts such as MTTF, MTTR, and MTBF related to equipment failure and availability.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-14",
+    "date": "2026-03-14",
+    "chapters": [10],
+    "notes": "Physical security chapter continued. Learned about securing wiring clostets, smartcards, badges, intrusion detection systems, and media storage facilities. This is a long chapter.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-15",
+    "date": "2026-03-15",
+    "chapters": [10],
+    "notes": "Physical security chapter completed. Learned about utility security considerations. The main points had to do with power, fire, noise, water, and lighting.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-20",
+    "date": "2026-03-20",
+    "chapters": [11],
+    "notes": "OSI model was introduced. The 7 layers (physical, data link, network, transport, session, presentation, and application) were explained. A cool saying to remember the 7 layers is: All Presidents Since Truman Never Did Pottery",
+    "tags": ["Reading", "Notes"]
   }
 ]

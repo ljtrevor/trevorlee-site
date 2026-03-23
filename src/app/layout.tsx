@@ -21,12 +21,32 @@ export const metadata: Metadata = {
     default: siteConfig.title,
     template: '%s | Trevor Lee'
   },
+  applicationName: 'Trevor Lee',
   description: siteConfig.description,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+  },
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+      'max-snippet': -1
+    }
   },
-  keywords: ['Trevor Lee', 'AI', 'Security', 'Privacy', 'CISSP', 'Software Engineering'],
+  keywords: [...siteConfig.keywords],
   category: 'technology',
   icons: {
     icon: '/icon.svg'
@@ -43,7 +63,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/images/headshot-avatar.webp',
+        url: siteConfig.image,
         width: 1200,
         height: 1200,
         alt: 'Trevor Lee'
@@ -54,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ['/images/headshot-avatar.webp']
+    images: [siteConfig.image]
   }
 };
 
@@ -75,11 +95,37 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       }
     })();
   `;
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    inLanguage: 'en-CA'
+  };
+
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    image: `${siteConfig.url}${siteConfig.image}`,
+    description: siteConfig.description,
+    sameAs: siteConfig.sameAs
+  };
 
   return (
     <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body>
         <Providers>
