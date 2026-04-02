@@ -367,7 +367,35 @@
     "id": "2026-03-20",
     "date": "2026-03-20",
     "chapters": [11],
-    "notes": "OSI model was introduced. The 7 layers (physical, data link, network, transport, session, presentation, and application) were explained. A cool saying to remember the 7 layers is: All Presidents Since Truman Never Did Pottery",
+    "notes": "The OSI model was introduced. The 7 layers (physical, data link, network, transport, session, presentation, and application) were explained. A useful saying to remember the layers is: All Presidents Since Truman Never Did Pottery.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-22",
+    "date": "2026-03-22",
+    "chapters": [11],
+    "notes": "The TCP/IP model was introduced. The 4 layers (link, internet, transport, and application) were explained. Common application protocols were mentioned, such as HTTP, FTP, SMTP, and POP3. TCP uses a three-way handshake to establish a connection. UDP was also mentioned and is a connectionless protocol.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-25",
+    "date": "2026-03-25",
+    "chapters": [11],
+    "notes": "DNS was introduced. It is a distributed system for resolving domain names to IP addresses. It is a hierarchical system, with the root domain at the top level. A DNS server can be authoritative for a domain. DNS poisoning is a type of attack where an attacker modifies DNS records to redirect users to a malicious website.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-03-28",
+    "date": "2026-03-28",
+    "chapters": [11],
+    "notes": "Internet Protocol (IP) was introduced. It is a connectionless protocol that does not guarantee delivery or order of packets. It is a best-effort delivery protocol. IP addresses are 32-bit values used to identify a device on a network. IPv4 is the most common version of IP, while IPv6 is the newer version and uses 128-bit addresses. ARP was also introduced and is used to find the MAC address of a device on a network.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-01",
+    "date": "2026-04-01",
+    "chapters": [11],
+    "notes": "Network segmentation was discussed. It is the process of dividing a network into smaller networks to improve security and performance. Segmentation can be done at the physical, data link, network, or application layer, though it is most commonly done at the network layer using routers. There are physical, logical, and hybrid segmentation approaches. Microsegmentation is a more granular form of logical segmentation, typically enforced with firewalls to control traffic between segments. It is used to improve security and support regulatory compliance.",
     "tags": ["Reading", "Notes"]
   }
 ]
