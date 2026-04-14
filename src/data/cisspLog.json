@@ -397,5 +397,33 @@
     "chapters": [11],
     "notes": "Network segmentation was discussed. It is the process of dividing a network into smaller networks to improve security and performance. Segmentation can be done at the physical, data link, network, or application layer, though it is most commonly done at the network layer using routers. There are physical, logical, and hybrid segmentation approaches. Microsegmentation is a more granular form of logical segmentation, typically enforced with firewalls to control traffic between segments. It is used to improve security and support regulatory compliance.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-02",
+    "date": "2026-04-02",
+    "chapters": [11],
+    "notes": "Started the wireless networking section and reviewed how wireless shares many of the same threats as wired networks, with added exposure to eavesdropping and denial-of-service because signals are unbounded. Studied 802.11 basics, ad hoc vs. infrastructure mode, and different access point deployment models including standalone, bridge, and extended modes. Also reviewed fat vs. thin access points and how centralized wireless controllers improve management and security. Finished by covering SSIDs, ESSIDs, BSSIDs, beacon frames, and why hiding the SSID is not real security.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-06",
+    "date": "2026-04-06",
+    "chapters": [11],
+    "notes": "Continued wireless networking with channel use, interference, site surveys, and how wireless cells are assessed for signal strength, quality, and coverage. Studied wireless security models including open system and shared key authentication, then reviewed WEP, WPA, WPA2, and WPA3 and how each improved on the last. Also covered enterprise authentication with 802.1X and EAP, along with LEAP, PEAP, and why WPS and MAC filtering are weak security measures. Finished with antenna types, captive portals, and general wireless hardening practices like firmware updates, changing defaults, and using WPA2 or WPA3.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-10",
+    "date": "2026-04-10",
+    "chapters": [11],
+    "notes": "Reviewed wireless communication methods including FHSS, DSSS, OFDM, MIMO, TDMA, and CDMA, and how they improve signal use and throughput. Also studied Bluetooth, RFID, and NFC, along with common Bluetooth attack types such as bluesnarfing, bluejacking, and bluesmacking. Covered wireless attack techniques including rogue access points, evil twin attacks, disassociation, adversary-in-the-middle, jamming, replay, and IV attacks, along with defenses like WIDS and using VPNs on wireless connections. Finished with notes on satellite and cellular communications and the role of CDNs in improving content delivery performance.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-13",
+    "date": "2026-04-13",
+    "chapters": [11],
+    "notes": "Moved into secure network design and reviewed intranets, extranets, screened subnets, and screened hosts, including how firewalls separate trusted and untrusted zones. Studied common network equipment such as repeaters, hubs, bridges, switches, routers, multiplexers, jump boxes, sensors, collectors, aggregators, and system-on-a-chip devices. Also covered network access control (NAC) and how it enforces policy before or after admission to the network. Finished with firewall concepts including packet filtering, application and circuit-level firewalls, stateful inspection, next-generation firewalls, and internal segmentation firewalls.",
+    "tags": ["Reading", "Notes"]
   }
 ]
