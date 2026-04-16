@@ -425,5 +425,12 @@
     "chapters": [11],
     "notes": "Moved into secure network design and reviewed intranets, extranets, screened subnets, and screened hosts, including how firewalls separate trusted and untrusted zones. Studied common network equipment such as repeaters, hubs, bridges, switches, routers, multiplexers, jump boxes, sensors, collectors, aggregators, and system-on-a-chip devices. Also covered network access control (NAC) and how it enforces policy before or after admission to the network. Finished with firewall concepts including packet filtering, application and circuit-level firewalls, stateful inspection, next-generation firewalls, and internal segmentation firewalls.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-15",
+    "date": "2026-04-15",
+    "chapters": [11],
+    "notes": "Finished Chapter 11 by reviewing network media, fiber optic cabling, transport architecture, and common physical network topologies including ring, bus, star, and mesh. I also studied Ethernet concepts, analog vs. digital signaling, synchronous vs. asynchronous transmission, baseband vs. broadband, and communication methods such as broadcast, multicast, unicast, anycast, and geocast. The chapter wrapped up with LAN media access methods including CSMA, CSMA/CD, CSMA/CA, token passing, and polling, which helped clarify how shared networks manage access and avoid collisions. Overall, this chapter gave me a much stronger foundation in how networks are structured, how data moves through them, and how communication is controlled across different media and topologies.",
+    "tags": ["Reading", "Notes"]
   }
 ]
