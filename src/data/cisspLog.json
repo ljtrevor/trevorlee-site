@@ -432,5 +432,33 @@
     "chapters": [11],
     "notes": "Finished Chapter 11 by reviewing network media, fiber optic cabling, transport architecture, and common physical network topologies including ring, bus, star, and mesh. I also studied Ethernet concepts, analog vs. digital signaling, synchronous vs. asynchronous transmission, baseband vs. broadband, and communication methods such as broadcast, multicast, unicast, anycast, and geocast. The chapter wrapped up with LAN media access methods including CSMA, CSMA/CD, CSMA/CA, token passing, and polling, which helped clarify how shared networks manage access and avoid collisions. Overall, this chapter gave me a much stronger foundation in how networks are structured, how data moves through them, and how communication is controlled across different media and topologies.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-16",
+    "date": "2026-04-16",
+    "chapters": [12],
+    "notes": "Authentication protocols include PPP with PAP, CHAP, and EAP, while port security restricts device access through controls like IEEE 802.1X. QoS manages network performance using bandwidth, latency, jitter, packet loss, throughput, and signal-to-noise ratio. PSTN, VoIP, vishing, phreaking, and PBX abuse show why voice communications need encryption, awareness, and security controls.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-18",
+    "date": "2026-04-18",
+    "chapters": [12],
+    "notes": "Remote access methods and collaboration tools require policies covering authentication, encryption, monitoring, and secure usage. Load balancing uses techniques like round robin, VIPs, and active-active or active-passive designs for scalability and failover. Email systems lack native security and face spoofing and DoS risks, mitigated by S/MIME, PGP, SPF, DKIM, DMARC, and TLS.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-22",
+    "date": "2026-04-22",
+    "chapters": [12],
+    "notes": "VPNs use tunneling and protocols like IPsec to secure traffic, while VLANs segment networks but can be attacked through VLAN hopping. MAC attacks include flooding and cloning/spoofing, mitigated by MAC limits, filtering, and intrusion detection. NAT/PAT hides internal networks and enables many clients through translation, while APIPA, loopback, circuit switching, packet switching, virtual circuits, and MOU/ISA agreements are key network concepts.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-04-25",
+    "date": "2026-04-25",
+    "chapters": [10],
+    "notes": "Reviewed my notes from Chapter 10 and studied the end of chapter summary + important terms.",
+    "tags": ["Review"]
   }
 ]
