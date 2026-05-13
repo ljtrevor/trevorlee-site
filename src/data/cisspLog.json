@@ -475,4 +475,18 @@
     "notes": "Reviewed my notes from Chapter 12 and studied the end of chapter summary + important terms.",
     "tags": ["Review"]
   }
+  {
+    "id": "2026-05-04",
+    "date": "2026-05-04",
+    "chapters": [13],
+    "notes": "Started chapter 13 on Managing Identity and Access Management (IAM). This chapter covers the fundamentals of identity and access management, including the different types of identities, the different types of access, and the different types of access management. It also covers the different types of identity and access management policies, and the different types of identity and access management systems.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-05-10",
+    "date": "2026-05-10",
+    "chapters": [13],
+    "notes": "Completed chapter 13 on Managing Identity and Access Management (IAM).",
+    "tags": ["Reading", "Notes"]
+  }
 ]
