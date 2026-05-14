@@ -488,5 +488,12 @@
     "chapters": [13],
     "notes": "Completed chapter 13 on Managing Identity and Access Management (IAM).",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-05-13",
+    "date": "2026-05-13",
+    "chapters": [14],
+    "notes": "Started chapter 14 on Controlling and Monitoring Access, covering the distinctions between permissions, rights, and privileges along with authorization mechanisms like implicit deny, access control matrices, and capability lists. Reviewed core security principles including need-to-know, least privilege, and separation of duties, plus constrained interfaces and content/context-dependent controls. Covered the main access control models (DAC, RBAC, Rule-Based, ABAC, MAC, and Risk-Based) and the MAC model variations (hierarchical, compartmentalized, and hybrid).",
+    "tags": ["Reading", "Notes"]
   }
 ]
