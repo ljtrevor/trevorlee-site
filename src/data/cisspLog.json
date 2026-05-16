@@ -497,10 +497,17 @@
     "tags": ["Reading", "Notes"]
   },
   {
-    "id": "2026-05-15",
-    "date": "2026-05-15",
+    "id": "2026-05-14",
+    "date": "2026-05-14",
     "chapters": [14],
     "notes": "Finished chapter 14 on Controlling and Monitoring Access, covering permissions/rights/privileges, authorization mechanisms (implicit deny, access control matrix, capability lists, constrained interfaces, content and context-dependent controls), and the main access control models (DAC, RBAC, Rule-Based, ABAC, MAC, Risk-Based). Reviewed SSO implementations including SAML, OAuth 2.0, OpenID Connect, Kerberos, RADIUS, and TACACS+, plus the zero trust components (subjects, policy engines, policy administrators, and policy enforcement points). Studied common access control attacks like privilege escalation, password attacks (dictionary, brute force, spraying, credential stuffing, birthday, rainbow table), pass-the-hash, Mimikatz, sniffing, and spoofing, along with core protection methods like salting/peppering, MFA, account lockout, and password masking.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-05-15",
+    "date": "2026-05-15",
+    "chapters": [15],
+    "notes": "Start chapter 15 on Security Assessment and Testing.",
     "tags": ["Reading", "Notes"]
   }
 ]
