@@ -509,5 +509,12 @@
     "chapters": [15],
     "notes": "Started chapter 15 on Security Assessment and Testing.",
     "tags": ["Reading", "Notes"]
-  }
+  },
+  {
+  "id": "2026-05-26",
+  "date": "2026-05-26",
+  "chapters": [15],
+  "notes": "Continue chapter 15 on Security Assessment and Testing, covering the three components of a security assessment program (security tests, assessments, and audits), including SOC 1/2/3 engagements, Type I/II reports, and audit frameworks like COBIT and ISO. Reviewed vulnerability assessment tools and the SCAP framework (CVE, CVSS, CCE, CPE, XCCDF, OVAL), plus the four categories of vulnerability scans: network discovery, network vulnerability, web vulnerability, and database vulnerability scanning. Covered the vulnerability management workflow (detection, validation, remediation), key TCP port numbers, and an introduction to penetration testing.",
+  "tags": ["Reading", "Notes"]
+}
 ]
