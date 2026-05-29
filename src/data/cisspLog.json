@@ -523,5 +523,12 @@
     "chapters": [15],
     "notes": "Finished chapter 15 on Security Assessment and Testing, covering software testing methods including code review (Fagan process), SAST, DAST, fuzz testing (mutation vs. generational), interface testing across APIs/UIs/network/physical, misuse case testing, and test coverage analysis (branch, condition, function, statement). Reviewed penetration testing phases from NIST SP 800-115 (planning, discovery, attack, reporting), white/gray/black box test types, and website monitoring via passive and synthetic methods. Wrapped up with red/blue/white team exercises, security management processes (log reviews, account management, DR/BC testing, training), and tracking key performance and risk indicators like open vulnerabilities and compromised accounts.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-05-28",
+    "date": "2026-05-28",
+    "chapters": [16],
+    "notes": "Started chapter 16 on Managing Security Operations, covering foundational concepts like due care vs. due diligence, need-to-know, least privilege, segregation of duties, two-person control, job rotation, mandatory vacations, PAM, and SLAs. Reviewed personnel safety and security topics including duress systems, travel safety, emergency management, and security awareness training. Began asset security covering information and asset ownership, hardware/software/intangible asset inventories, and tracking methods like barcodes and RFID tags.",
+    "tags": ["Reading", "Notes"]
   }
 ]
