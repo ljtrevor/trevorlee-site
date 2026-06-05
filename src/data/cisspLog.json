@@ -530,5 +530,12 @@
     "chapters": [16],
     "notes": "Started chapter 16 on Managing Security Operations, covering foundational concepts like due care vs. due diligence, need-to-know, least privilege, segregation of duties, two-person control, job rotation, mandatory vacations, PAM, and SLAs. Reviewed personnel safety and security topics including duress systems, travel safety, emergency management, and security awareness training. Began asset security covering information and asset ownership, hardware/software/intangible asset inventories, and tracking methods like barcodes and RFID tags.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-02",
+    "date": "2026-06-02",
+    "chapters": [16],
+    "notes": "Completed chapter 16, read up on personnel safety (duress systems, travel safety, emergency management), and asset management (hardware/software/intangible inventories tracked via barcodes and RFID). Covered cloud services including SaaS/PaaS/IaaS shared responsibility models, the four cloud deployment types (public, private, community, hybrid), serverless architecture, and the difference between scalability and elasticity. Studied configuration management (provisioning, baselining, automation), change management (6-step process rooted in ITIL), patch management (5-step process), vulnerability management, and the CVE dictionary as a standard for identifying and describing vulnerabilities.",
+    "tags": ["Reading", "Notes"]
   }
 ]
