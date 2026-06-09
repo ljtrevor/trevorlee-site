@@ -537,5 +537,12 @@
     "chapters": [16],
     "notes": "Completed chapter 16, read up on personnel safety (duress systems, travel safety, emergency management), and asset management (hardware/software/intangible inventories tracked via barcodes and RFID). Covered cloud services including SaaS/PaaS/IaaS shared responsibility models, the four cloud deployment types (public, private, community, hybrid), serverless architecture, and the difference between scalability and elasticity. Studied configuration management (provisioning, baselining, automation), change management (6-step process rooted in ITIL), patch management (5-step process), vulnerability management, and the CVE dictionary as a standard for identifying and describing vulnerabilities.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-05",
+    "date": "2026-06-05",
+    "chapters": [17],
+    "notes": "Started chapter 17 on Preventing and Responding to Incidents, covering the goal of incident management (minimize organizational impact) and the 7-step lifecycle: Detection, Response, Mitigation, Reporting, Recovery, Remediation, and Lessons Learned. Reviewed each phase in detail including detection tools alerting IT staff, mitigation containing the incident, reporting obligations under law, recovery returning systems to full function, and remediation performing root cause analysis to prevent recurrence. Began covering preventive and detection controls, basic preventive measures (patching, removing unneeded services, IDS/IPS, antimalware, firewalls), and an introduction to botnets and denial of service attacks.",
+    "tags": ["Reading", "Notes"]
   }
 ]
