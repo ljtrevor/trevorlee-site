@@ -550,5 +550,12 @@
     "date": "2026-06-10",
     "chapters": [17],
     "notes": "Completed chapter 17. This chapter focused on Intrusion Detection and Prevention Systems (IDS/IPS). It covered the importance of logging and monitoring systems. It also covered ways to automage incident response."
+  },
+  {
+    "id": "2026-06-17",
+    "date": "2026-06-17",
+    "chapters": [18],
+    "notes": "Started chapter 18 on Disaster Recovery Planning, covering system resilience, fault tolerance, and high availability as tools to eliminate single points of failure, plus hardware protections like RAID, failover clusters, UPS/generators, and trusted recovery (4 types: manual, automated, automated without undue loss, function recovery). Reviewed QoS factors (bandwidth, latency, jitter, packet loss, interference) and recovery strategy components including crisis management, emergency communications, workgroup recovery, and alternate processing sites (cold/warm/hot/mobile sites, cloud computing, and Mutual Assistance Agreements). Covered database recovery techniques ranked by cost: electronic vaulting, remote journaling, and remote mirroring, and began Recovery Plan Development.",
+    "tags": ["Reading", "Notes"]
   }
 ]
