@@ -557,5 +557,12 @@
     "chapters": [18],
     "notes": "Started chapter 18 on Disaster Recovery Planning, covering system resilience, fault tolerance, and high availability as tools to eliminate single points of failure, plus hardware protections like RAID, failover clusters, UPS/generators, and trusted recovery (4 types: manual, automated, automated without undue loss, function recovery). Reviewed QoS factors (bandwidth, latency, jitter, packet loss, interference) and recovery strategy components including crisis management, emergency communications, workgroup recovery, and alternate processing sites (cold/warm/hot/mobile sites, cloud computing, and Mutual Assistance Agreements). Covered database recovery techniques ranked by cost: electronic vaulting, remote journaling, and remote mirroring, and began Recovery Plan Development.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-20",
+    "date": "2026-06-20",
+    "chapters": [18],
+    "notes": "Completed chapter 18 on Disaster Recovery Planning, covering system resilience, fault tolerance, high availability, RAID, failover clusters, UPS/generators, trusted recovery types, QoS factors, alternate site types (cold/warm/hot/mobile/cloud), Mutual Assistance Agreements, and database recovery techniques (electronic vaulting, remote journaling, remote mirroring). Covered recovery plan components including emergency response, personnel/communications, assessment, backup strategies (full, incremental, differential), software escrow arrangements, and DRP testing methods (read-through, tabletop, walk-through, simulation, parallel, and full interruption) along with ongoing maintenance and lessons learned.",
+    "tags": ["Reading", "Notes"]
   }
 ]
