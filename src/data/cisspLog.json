@@ -564,5 +564,19 @@
     "chapters": [18],
     "notes": "Completed chapter 18 on Disaster Recovery Planning, covering system resilience, fault tolerance, high availability, RAID, failover clusters, UPS/generators, trusted recovery types, QoS factors, alternate site types (cold/warm/hot/mobile/cloud), Mutual Assistance Agreements, and database recovery techniques (electronic vaulting, remote journaling, remote mirroring). Covered recovery plan components including emergency response, personnel/communications, assessment, backup strategies (full, incremental, differential), software escrow arrangements, and DRP testing methods (read-through, tabletop, walk-through, simulation, parallel, and full interruption) along with ongoing maintenance and lessons learned.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-23",
+    "date": "2026-06-23",
+    "chapters": [19],
+    "notes": "Completed chapter 19 on Investigations and Ethics. It covered different types of investigations, the role of the investigator, and the importance of ethics in investigations.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-25",
+    "date": "2026-06-25",
+    "chapters": [20],
+    "notes": "Started chapter 20 on software development security.",
+    "tags": ["Reading", "Notes"]
   }
 ]
