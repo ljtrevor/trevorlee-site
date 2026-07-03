@@ -578,5 +578,19 @@
     "chapters": [20],
     "notes": "Started chapter 20 on software development security.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-06-28",
+    "date": "2026-06-28",
+    "chapters": [20],
+    "notes": "Completed chapter 20 on software development security. It covered the importance of security in software development, the different stages of software development, and the different security risks that can occur at each stage.",
+    "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-07-01",
+    "date": "2026-07-01",
+    "chapters": [21],
+    "notes": "Started chapter 21 on malicious code and application attacks.",
+    "tags": ["Reading", "Notes"]
   }
 ]
