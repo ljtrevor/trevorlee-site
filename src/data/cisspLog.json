@@ -599,5 +599,26 @@
     "chapters": [21],
     "notes": "Completed chapter 21. The final chapter to read! Now to review the notes and do practice questions.",
     "tags": ["Reading", "Notes"]
+  },
+  {
+    "id": "2026-07-08",
+    "date": "2026-07-08",
+    "chapters": [10, 11, 12],
+    "notes": "Reviewed my notes from chapters 10, 11, and 12.",
+    "tags": ["Review"]
+  },
+  {
+    "id": "2026-07-09",
+    "date": "2026-07-09",
+    "chapters": [13, 14],
+    "notes": "Reviewed my notes from chapters 13, 14.",
+    "tags": ["Review"]
+  },
+  {
+    "id": "2026-07-16",
+    "date": "2026-07-16",
+    "chapters": [15, 16],
+    "notes": "Reviewed my notes from chapters 15, 16.",
+    "tags": ["Review"]
   }
 ]
