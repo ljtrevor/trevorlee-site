@@ -634,5 +634,61 @@
     "chapters": [20, 21],
     "notes": "Reviewed my notes from chapters 20 and 21.",
     "tags": ["Review"]
+  },
+  {
+    "id": "2026-07-22",
+    "date": "2026-07-22",
+    "chapters": [10],
+    "notes": "Chapter 10 practice test questions.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-23",
+    "date": "2026-07-23",
+    "chapters": [11],
+    "notes": "Chapter 11 practice test questions. Need to review this chapter deeper, it is more challenging for me.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-24",
+    "date": "2026-07-24",
+    "chapters": [12],
+    "notes": "Chapter 12 practice test questions. This chapter builds from chapter 11, need to review it more as well.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-27",
+    "date": "2026-07-27",
+    "chapters": [13],
+    "notes": "Chapter 13 practice test questions.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-28",
+    "date": "2026-07-28",
+    "chapters": [14],
+    "notes": "Chapter 10 practice test questions.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-29",
+    "date": "2026-07-29",
+    "chapters": [15],
+    "notes": "Chapter 15 practice test questions.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-07-31",
+    "date": "2026-07-31",
+    "chapters": [16],
+    "notes": "Chapter 16 practice test questions.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-08-02",
+    "date": "2026-08-02",
+    "chapters": [17],
+    "notes": "Chapter 17 practice test questions.",
+    "tags": ["Practice Questions"]
   }
 ]
