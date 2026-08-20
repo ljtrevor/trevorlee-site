@@ -711,5 +711,19 @@
     "chapters": [20, 21],
     "notes": "Chapter 20 and 21 practice test questions.",
     "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-08-13",
+    "date": "2026-08-13",
+    "chapters": [10, 11, 12, 13],
+    "notes": "Review the concepts from the practice test questions I got wrong.",
+    "tags": ["Practice Questions"]
+  },
+  {
+    "id": "2026-08-19",
+    "date": "2026-08-19",
+    "chapters": [14, 15, 16, 17, 18],
+    "notes": "Review the concepts from the practice test questions I got wrong.",
+    "tags": ["Practice Questions"]
   }
 ]
