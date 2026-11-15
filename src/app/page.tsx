@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { CompactRoleRows } from '@/components/RoleRows';
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
 import { approach, roles, selectedWork } from '@/data/profile';
 import { TOTAL_CHAPTERS } from '@/utils/cisspCore';
 
@@ -15,10 +15,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
-    url: '/'
+    url: '/',
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: shareImages,
     title: siteConfig.title,
     description: siteConfig.description
   }

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DetailedRoleRows } from '@/components/RoleRows';
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
 import { education, operationsSkills, roles, technicalSkills } from '@/data/profile';
 
 const description =
@@ -16,10 +16,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Trevor Lee',
     description,
-    url: '/about'
+    url: '/about',
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: shareImages,
     title: 'About Trevor Lee',
     description
   }

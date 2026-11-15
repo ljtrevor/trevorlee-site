@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -79,20 +79,13 @@ export const metadata: Metadata = {
     siteName: 'Trevor Lee',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.image,
-        width: 512,
-        height: 527,
-        alt: 'Trevor Lee'
-      }
-    ]
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.image]
+    images: shareImages
   }
 };
 

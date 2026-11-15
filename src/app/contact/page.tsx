@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
 
 const description = 'Reach Trevor Lee by email, LinkedIn, or GitHub.';
 
@@ -11,10 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Trevor Lee',
     description,
-    url: '/contact'
+    url: '/contact',
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: shareImages,
     title: 'Contact Trevor Lee',
     description
   }
