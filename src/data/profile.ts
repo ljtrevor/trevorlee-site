@@ -33,7 +33,7 @@ export const selectedWork: WorkItem[] = [
     where: 'Workday',
     when: '2019 to 2021',
     title: 'Faster, documented APIs for HR systems used by millions',
-    body: 'On Workday’s People Experience platform I improved API performance by 86% and documented 70+ endpoints so other teams could integrate reliably. I also served as Co-Scrum Master, coordinating sprints for the team.'
+    body: 'On Workday’s People Experience platform I improved API performance by 86% and documented 70+ endpoints so other teams could integrate reliably. I also served as Co-Scrum Master for my team, coordinating our sprints.'
   }
 ];
 
@@ -102,7 +102,7 @@ export const roles: Role[] = [
     title: 'Software Development Engineer',
     company: 'Workday',
     featured: true,
-    body: 'Worked on 70+ APIs for the People Experience platform, improved API performance by 86%, and documented 70+ endpoints for internal integrations. Served as Co-Scrum Master, coordinating sprints.'
+    body: 'Worked on 70+ APIs for the People Experience platform, improved API performance by 86%, and documented 70+ endpoints for internal integrations. Served as Co-Scrum Master for my team, coordinating sprints.'
   },
   {
     when: '2017',
