@@ -15,7 +15,7 @@ export const selectedWork: WorkItem[] = [
     where: 'ThoughtExchange',
     when: '2021 to 2026',
     title: 'AI analytics in production for 500+ school districts',
-    body: 'I architected the AI analytics that turn thousands of survey responses into insights for more than 500 school districts, with the retry logic, rate limiting, and privacy controls that production use needs. The insight tools supported a 72% increase in enterprise renewals.'
+    body: 'I architected the AI analytics that turn thousands of survey responses into insights for school districts, with the retry logic, rate limiting, and privacy controls that production use needs. The insight tools supported a 72% increase in enterprise renewals.'
   },
   {
     where: 'ThoughtExchange',
@@ -33,7 +33,7 @@ export const selectedWork: WorkItem[] = [
     where: 'Workday',
     when: '2019 to 2021',
     title: 'Faster, documented APIs for HR systems used by millions',
-    body: 'On Workday’s People Experience platform I improved API performance by 86% and documented more than 70 endpoints so other teams could integrate reliably. I also served as Co-Scrum Master, coordinating sprints for the team.'
+    body: 'On Workday’s People Experience platform I improved API performance by 86% and documented 70+ endpoints so other teams could integrate reliably. I also served as Co-Scrum Master, coordinating sprints for the team.'
   }
 ];
 
@@ -49,11 +49,11 @@ export const approach: Step[] = [
   },
   {
     label: 'Get it running',
-    body: 'I take it from idea to daily use, with the reliability and privacy controls that requires.'
+    body: 'I turn the idea into a working tool that the team uses every day. Before anyone depends on it, I make sure it is reliable and keeps private data protected.'
   },
   {
     label: 'Train the team',
-    body: 'I run workshops and write materials for the people who will use it, most of whom aren’t technical.'
+    body: 'I run workshops and write materials for the people who will use it, most of whom are not technical.'
   },
   {
     label: 'Keep it running',
@@ -133,14 +133,3 @@ export const roles: Role[] = [
     body: 'Built 100+ automated tests to catch defects and security issues before release.'
   }
 ];
-
-export const operationsSkills =
-  'Incident response and on-call, monitoring and centralized logging, runbooks, and identity and access management.';
-
-export const technicalSkills =
-  'AWS, Azure, Docker, Kubernetes, PostgreSQL, Python, TypeScript, and the OpenAI and Anthropic APIs.';
-
-export const education = {
-  school: 'University of Victoria',
-  degree: 'Bachelor of Engineering, Software Engineering'
-};

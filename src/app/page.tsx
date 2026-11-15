@@ -33,7 +33,7 @@ export default function HomePage() {
         <h1 className="statement">I help teams adopt AI and keep the systems behind it running.</h1>
         <p className="lede">
           I spent seven years in software engineering, five of them on AI analytics and
-          integrations for a platform used by more than 500 school districts. Now my work is on
+          integrations for a platform used by 500+ school districts. Now my work is on
           the operations side of AI: finding where it helps, getting it into daily use, and
           training the people who rely on it.
         </p>
@@ -82,7 +82,7 @@ export default function HomePage() {
         </h2>
         <CompactRoleRows roles={roles.filter((role) => role.featured)} />
         <p className="block__more">
-          <Link href="/about">Full background, including co-ops and education</Link>
+          <Link href="/about">Full background, including co-ops</Link>
         </p>
       </section>
 
@@ -93,8 +93,8 @@ export default function HomePage() {
         <div className="row">
           <h3 className="row__label">Studying</h3>
           <p className="row__body">
-            I’m working toward the CISSP. I’ve been through all {TOTAL_CHAPTERS} chapters of the
-            official study guide and I’m on practice questions.{' '}
+            I am working toward the CISSP. I have been through all {TOTAL_CHAPTERS} chapters of
+            the official study guide and am now on practice questions.{' '}
             <Link href="/cissp-study-log">Read the study log</Link>.
           </p>
         </div>
@@ -102,7 +102,7 @@ export default function HomePage() {
           <h3 className="row__label">Consulting</h3>
           <p className="row__body">
             I take on a small amount of AI consulting work.{' '}
-            <a href={`mailto:${siteConfig.email}`}>Email me</a> if that’s useful.
+            <a href={`mailto:${siteConfig.email}`}>Email me</a> to talk about your project.
           </p>
         </div>
       </section>
