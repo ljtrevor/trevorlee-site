@@ -28,12 +28,12 @@ export default function HomePage() {
   return (
     <>
       <section className="hero">
-        <h1 className="statement">I help teams adopt AI, and I build the systems behind it.</h1>
+        <h1 className="statement">I help teams adopt AI and keep the systems behind it running.</h1>
         <p className="lede">
-          I’ve been building software for seven years, five of them on AI analytics and
-          integrations for a platform used by more than 500 school districts. These days my work
-          is AI adoption: finding where it helps, building the workflow, and training the people
-          who will use it.
+          I spent seven years in software engineering, five of them on AI analytics and
+          integrations for a platform used by more than 500 school districts. Now my work is on
+          the operations side of AI: finding where it helps, getting it into daily use, and
+          training the people who rely on it.
         </p>
         <p className="link-row">
           <a href={`mailto:${siteConfig.email}`}>Email me</a>

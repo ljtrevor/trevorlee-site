@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 import { DetailedRoleRows } from '@/components/RoleRows';
 import { siteConfig } from '@/components/siteConfig';
-import { education, roles, tools } from '@/data/profile';
+import { education, operationsSkills, roles, technicalSkills } from '@/data/profile';
 
 const description =
-  'Trevor Lee’s background: software engineering at Workday and ThoughtExchange, AI consulting, and AI adoption work today.';
+  'Trevor Lee’s background: seven years of software engineering at Workday and ThoughtExchange, AI consulting, and AI adoption and operations work today.';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -50,25 +50,31 @@ export default function AboutPage() {
           </div>
           <div className="row__body">
             <p>
-              I’m a software engineer who works on AI adoption: figuring out where AI helps a
-              team, building it, and getting people comfortable using it.
+              I spent seven years as a software engineer. These days I work on the operations
+              side: figuring out where AI helps a team, getting it into people’s hands, and
+              keeping the systems behind it reliable.
             </p>
             <p>
-              I studied software engineering at the University of Victoria and did co-ops at IBM,
-              VertiGIS, UVic’s high energy physics computing group, and SaaSquatch. After
-              graduating I joined Workday, where I built APIs for the People Experience platform.
-              Then came five years at ThoughtExchange, where most of my work became AI: survey
-              analytics, LLM integrations, and the on-call work that keeps them running.
+              I studied software engineering at the University of Victoria. Two of my co-ops were
+              operations work: IT infrastructure and access management at VertiGIS, and cloud
+              monitoring and incident runbooks for UVic’s high energy physics computing group.
             </p>
             <p>
-              In 2026 I consulted for small businesses and teams with no engineers of their own,
-              taking projects from the first conversation about what to automate through to a
-              deployed tool and a trained team. Now I do that work full time.
+              After graduating I joined Workday, where I worked on APIs for the People Experience
+              platform and served as Co-Scrum Master. Then came five years at ThoughtExchange.
+              Most of my work there became AI: survey analytics for more than 500 school
+              districts, the integrations around them, and the on-call rotations that kept them
+              running.
             </p>
             <p>
-              Security runs through all of it. I’ve investigated reliability and security issues
-              across hundreds of production incidents, and I’m studying for the CISSP to build on
-              that with risk and security architecture.{' '}
+              In 2026 I consulted for small businesses and teams with no technical staff, taking
+              projects from the first conversation about what to automate through to a working
+              tool and a trained team. Now I do that work full time.
+            </p>
+            <p>
+              The part I care about most is what happens after launch: whether a system is
+              reliable, documented, secure, and used. I’m studying for the CISSP to build on that
+              with risk and security architecture.{' '}
               <Link href="/cissp-study-log">The study log is public</Link>.
             </p>
           </div>
@@ -84,7 +90,7 @@ export default function AboutPage() {
 
       <section className="block" aria-labelledby="more-title">
         <h2 className="block__title" id="more-title">
-          Education and tools
+          Education and skills
         </h2>
         <div className="row">
           <h3 className="row__label">Education</h3>
@@ -93,8 +99,12 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="row">
-          <h3 className="row__label">Tools</h3>
-          <p className="row__body">{tools}</p>
+          <h3 className="row__label">Operations</h3>
+          <p className="row__body">{operationsSkills}</p>
+        </div>
+        <div className="row">
+          <h3 className="row__label">Technical</h3>
+          <p className="row__body">{technicalSkills}</p>
         </div>
       </section>
     </>

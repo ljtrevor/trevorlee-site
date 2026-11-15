@@ -14,26 +14,26 @@ export const selectedWork: WorkItem[] = [
   {
     where: 'ThoughtExchange',
     when: '2021 to 2026',
-    title: 'AI survey analytics used by 500+ school districts',
-    body: 'I architected the AI analytics that turn thousands of survey responses into insights for more than 500 school districts. The natural-language insight tools I delivered supported a 72% increase in enterprise renewals.'
+    title: 'AI analytics in production for 500+ school districts',
+    body: 'I architected the AI analytics that turn thousands of survey responses into insights for more than 500 school districts, with the retry logic, rate limiting, and privacy controls that production use needs. The insight tools supported a 72% increase in enterprise renewals.'
   },
   {
     where: 'ThoughtExchange',
     when: '2021 to 2026',
-    title: 'LLM services built for production',
-    body: 'I built the Python services that connect the product to OpenAI and Anthropic models, with the retry logic, rate limiting, and privacy controls that production use needs. I also took on-call rotations, handling hundreds of production alerts and incidents.'
+    title: 'Hundreds of production incidents, handled on call',
+    body: 'I took on-call rotations for the platform and handled hundreds of production alerts and incidents, investigating the reliability and security issues behind them.'
   },
   {
     where: 'Freelance',
     when: '2026',
-    title: 'An AI agent that runs a coffee shop’s day-to-day operations',
-    body: 'For a coffee shop with no engineers of its own, I built and deployed an AI agent to handle day-to-day operations, along with a customer-facing website and a restructured menu.'
+    title: 'AI for small businesses with no technical staff',
+    body: 'I worked with small businesses and teams to find where AI would help, set up workflows that automated data entry, intake, and reporting, and trained their staff through workshops. For a coffee shop, that meant an AI agent to run day-to-day operations.'
   },
   {
     where: 'Workday',
     when: '2019 to 2021',
-    title: '70+ APIs behind HR systems used by millions',
-    body: 'I developed more than 70 APIs for Workday’s People Experience platform and wrote the OpenAPI documentation for them. Query optimization and indexing in OracleDB improved API performance by 86%.'
+    title: 'Faster, documented APIs for HR systems used by millions',
+    body: 'On Workday’s People Experience platform I improved API performance by 86% and documented more than 70 endpoints so other teams could integrate reliably. I also served as Co-Scrum Master, coordinating sprints for the team.'
   }
 ];
 
@@ -48,12 +48,16 @@ export const approach: Step[] = [
     body: 'I start with the work people already do and look for the steps where AI saves real time. Data entry, intake, and reporting are the usual places.'
   },
   {
-    label: 'Build it',
-    body: 'I design and build the workflow end to end, from the interface to the backend services and model integrations, and I build it to run in production.'
+    label: 'Get it running',
+    body: 'I take it from idea to daily use, with the reliability and privacy controls that requires.'
   },
   {
-    label: 'Teach it',
-    body: 'I run workshops and write materials for the people who will use the tool, most of whom aren’t technical.'
+    label: 'Train the team',
+    body: 'I run workshops and write materials for the people who will use it, most of whom aren’t technical.'
+  },
+  {
+    label: 'Keep it running',
+    body: 'I document how it works, set up monitoring and alerts, and investigate what breaks.'
   }
 ];
 
@@ -83,7 +87,7 @@ export const roles: Role[] = [
     title: 'AI Solutions Consultant',
     company: 'Freelance',
     featured: true,
-    body: 'AI and software for small businesses and teams without in-house engineers, from choosing the use case to deploying the result. I built custom AI workflows that automated data entry, intake, and reporting, and trained non-technical teams through workshops.'
+    body: 'AI for small businesses and teams without technical staff, from choosing the use case to putting the result into daily use. Set up custom AI workflows that automated data entry, intake, and reporting, and trained non-technical teams through workshops.'
   },
   {
     when: '2021 to 2026',
@@ -91,47 +95,50 @@ export const roles: Role[] = [
     company: 'ThoughtExchange',
     focus: 'AI, Systems and Integration',
     featured: true,
-    body: 'Architected AI survey analytics used by 500+ school districts. Built Python services on the OpenAI and Anthropic APIs, integrated Gainsight and BI platforms for customer analytics, and shipped full-stack product features. Handled hundreds of production alerts and incidents on call.'
+    body: 'Architected AI survey analytics used by 500+ school districts and integrated OpenAI, Anthropic, Gainsight, and BI platforms for customer analytics and reporting. Took on-call rotations, handling hundreds of production alerts and incidents and investigating reliability and security issues.'
   },
   {
     when: '2019 to 2021',
     title: 'Software Development Engineer',
     company: 'Workday',
     featured: true,
-    body: 'Developed 70+ APIs for the People Experience platform and improved API performance by 86%. Enabled Slack and Microsoft Teams integrations for querying HR data. Served as Co-Scrum Master.'
+    body: 'Worked on 70+ APIs for the People Experience platform, improved API performance by 86%, and documented 70+ endpoints for internal integrations. Served as Co-Scrum Master, coordinating sprints.'
   },
   {
     when: '2017',
     title: 'Software Developer',
     company: 'SaaSquatch',
     note: 'Co-op',
-    body: 'Full-stack features for a referral marketing platform, plus iOS and Android SDKs for customer integrations.'
+    body: 'Full-stack features and mobile SDKs for a referral marketing platform. Supported AWS deployments and production release monitoring.'
   },
   {
     when: '2016',
     title: 'Cloud Computing Developer',
     company: 'University of Victoria, High Energy Physics Research Computing',
     note: 'Co-op',
-    body: 'Multi-cloud monitoring dashboards and centralized logging for the computing behind CERN’s ATLAS experiment and Belle II at KEK.'
+    body: 'Monitoring dashboards across AWS, Azure, and GCP, centralized logging and alerting, and incident runbooks for the computing behind CERN’s ATLAS experiment and Belle II at KEK.'
   },
   {
     when: '2015',
     title: 'IT Support Analyst, Infrastructure',
     company: 'VertiGIS',
     note: 'Co-op',
-    body: 'IT infrastructure and access management for 130+ employees. Automated onboarding with PowerShell, which cut provisioning time in half.'
+    body: 'IT infrastructure and procurement for 130+ employees. Managed identity and access for 300 users, ran access reviews, and automated onboarding with PowerShell, which cut provisioning time in half.'
   },
   {
     when: '2015',
     title: 'Software Test Specialist',
     company: 'IBM',
     note: 'Co-op',
-    body: 'Built 100+ automated tests with JUnit and Selenium.'
+    body: 'Built 100+ automated tests to catch defects and security issues before release.'
   }
 ];
 
-export const tools =
-  'Python, TypeScript, React, PostgreSQL, AWS, Docker, Kubernetes, and the OpenAI and Anthropic APIs.';
+export const operationsSkills =
+  'Incident response and on-call, monitoring and centralized logging, runbooks, and identity and access management.';
+
+export const technicalSkills =
+  'AWS, Azure, Docker, Kubernetes, PostgreSQL, Python, TypeScript, and the OpenAI and Anthropic APIs.';
 
 export const education = {
   school: 'University of Victoria',

@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: 'Trevor Lee',
-  title: 'Trevor Lee | AI Adoption and Engineering',
+  title: 'Trevor Lee | AI Adoption and Technical Operations',
   description:
-    'Trevor Lee helps teams adopt AI and builds the systems behind it. Seven years of software engineering across AI analytics, LLM integrations, and enterprise APIs.',
+    'Trevor Lee helps teams adopt AI and keeps the systems behind it running. Background in AI analytics, incident response, and enterprise integrations.',
   url: 'https://trevorlee.ca',
   image: '/images/headshot-avatar.webp',
   location: 'Greater Vancouver, BC',
@@ -10,10 +10,10 @@ export const siteConfig = {
     'Trevor Lee',
     'AI adoption',
     'AI enablement',
+    'technical operations',
+    'incident response',
     'AI systems',
-    'LLM integration',
-    'software engineering',
-    'security engineering',
+    'security',
     'CISSP'
   ],
   email: 'trevor@trevorlee.ca',
