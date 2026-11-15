@@ -1,134 +1,72 @@
-import { alpha, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 export type SiteThemeMode = 'light' | 'dark';
 
-const lightPalette = {
-  stone: '#f5f3ef',
-  paper: '#faf9f6',
-  slate: '#2f3b3b',
-  mutedMoss: '#6f8371',
-  mutedInk: '#5f7083',
-  textPrimary: '#1f2524',
-  textSecondary: '#4b5552',
-  border: '#d7dad7'
-};
+/*
+  MUI is only used on the CISSP study log page. These values mirror the CSS
+  tokens in src/app/globals.css; change both together.
+*/
+const tokens = {
+  light: {
+    paper: '#f3f5f2',
+    paperRaised: '#fafbf9',
+    ink: '#14211d',
+    muted: '#52615b',
+    rule: '#ccd4cf',
+    accent: '#2447d6'
+  },
+  dark: {
+    paper: '#0e1614',
+    paperRaised: '#141e1b',
+    ink: '#e6ece8',
+    muted: '#9aa8a1',
+    rule: '#2a3833',
+    accent: '#9db4ff'
+  }
+} as const;
 
-const darkPalette = {
-  charcoal: '#141918',
-  ink: '#1c2424',
-  elevated: '#232d2c',
-  mutedMoss: '#8ea891',
-  mutedInk: '#93a6bb',
-  textPrimary: '#e8ecea',
-  textSecondary: '#b4bdb9',
-  border: '#364140'
-};
+const sans = 'var(--font-sans), system-ui, sans-serif';
 
 export function getSiteTheme(mode: SiteThemeMode) {
-  const isDark = mode === 'dark';
+  const t = tokens[mode];
 
   return createTheme({
     palette: {
       mode,
-      primary: {
-        main: isDark ? darkPalette.mutedInk : lightPalette.mutedInk
-      },
-      secondary: {
-        main: isDark ? darkPalette.mutedMoss : lightPalette.mutedMoss
-      },
-      background: {
-        default: isDark ? darkPalette.charcoal : lightPalette.stone,
-        paper: isDark ? darkPalette.ink : lightPalette.paper
-      },
-      text: {
-        primary: isDark ? darkPalette.textPrimary : lightPalette.textPrimary,
-        secondary: isDark ? darkPalette.textSecondary : lightPalette.textSecondary
-      },
-      divider: isDark ? darkPalette.border : lightPalette.border
+      primary: { main: t.accent },
+      secondary: { main: t.muted },
+      background: { default: t.paper, paper: t.paperRaised },
+      text: { primary: t.ink, secondary: t.muted },
+      divider: t.rule
     },
     shape: {
-      borderRadius: 14
+      borderRadius: 6
     },
     typography: {
-      fontFamily: 'var(--font-sans), sans-serif',
-      h1: {
-        fontWeight: 600,
-        letterSpacing: '-0.02em'
-      },
-      h2: {
-        fontWeight: 600,
-        letterSpacing: '-0.01em'
-      },
-      h3: {
-        fontWeight: 600
-      },
-      button: {
-        textTransform: 'none',
-        fontWeight: 500
-      }
+      fontFamily: sans,
+      h1: { fontWeight: 600, letterSpacing: '-0.025em' },
+      h2: { fontWeight: 600, letterSpacing: '-0.02em' },
+      h3: { fontWeight: 600, letterSpacing: '-0.02em' },
+      h6: { fontWeight: 600, letterSpacing: '-0.01em' },
+      button: { textTransform: 'none', fontWeight: 500 }
     },
     components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            background: isDark
-              ? 'radial-gradient(circle at top right, rgba(142, 168, 145, 0.12), transparent 46%), radial-gradient(circle at 10% 20%, rgba(147, 166, 187, 0.12), transparent 42%)'
-              : 'radial-gradient(circle at top right, rgba(111, 131, 113, 0.12), transparent 45%), radial-gradient(circle at 10% 20%, rgba(95, 112, 131, 0.14), transparent 40%)',
-            backgroundColor: isDark ? darkPalette.charcoal : lightPalette.stone,
-            color: isDark ? darkPalette.textPrimary : lightPalette.textPrimary,
-            transition: 'background-color 220ms ease, color 220ms ease'
-          },
-          a: {
-            color: 'inherit'
-          },
-          '*:focus-visible': {
-            outline: `2px solid ${isDark ? darkPalette.mutedInk : lightPalette.mutedInk}`,
-            outlineOffset: '2px'
-          }
-        }
-      },
-      MuiAppBar: {
-        styleOverrides: {
-          root: {
-            backgroundColor: isDark ? alpha(darkPalette.ink, 0.9) : alpha(lightPalette.stone, 0.92),
-            backdropFilter: 'saturate(170%) blur(8px)',
-            borderBottom: `1px solid ${isDark ? darkPalette.border : lightPalette.border}`,
-            color: isDark ? darkPalette.textPrimary : lightPalette.textPrimary,
-            boxShadow: 'none',
-            transition: 'background-color 220ms ease, color 220ms ease, border-color 220ms ease'
-          }
-        }
-      },
       MuiCard: {
         styleOverrides: {
           root: {
-            border: `1px solid ${isDark ? darkPalette.border : lightPalette.border}`,
-            backgroundColor: isDark ? darkPalette.ink : lightPalette.paper,
-            boxShadow: 'none',
-            transition: 'background-color 220ms ease, border-color 220ms ease, color 220ms ease'
-          }
-        }
-      },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            transition: 'background-color 220ms ease, color 220ms ease, border-color 220ms ease'
+            border: `1px solid ${t.rule}`,
+            backgroundColor: t.paperRaised,
+            backgroundImage: 'none',
+            boxShadow: 'none'
           }
         }
       },
       MuiButton: {
-        styleOverrides: {
-          root: {
-            borderRadius: 999,
-            transition: 'background-color 180ms ease, color 180ms ease, border-color 180ms ease'
-          }
-        }
+        defaultProps: { disableElevation: true }
       },
       MuiChip: {
         styleOverrides: {
-          root: {
-            borderRadius: 8
-          }
+          root: { borderRadius: 4 }
         }
       }
     }

@@ -1,122 +1,79 @@
 'use client';
 
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Drawer,
-  IconButton,
-  Stack,
-  Toolbar,
-  Tooltip,
-  Typography
-} from '@mui/material';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
 import { useColorMode } from '@/theme/colorMode';
 
 const navItems = [
-  { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'CISSP Study Log', href: '/cissp-study-log' },
+  { label: 'Study log', href: '/cissp-study-log' },
   { label: 'Contact', href: '/contact' }
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const { mode, toggleMode } = useColorMode();
-
-  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+  const { toggleMode } = useColorMode();
 
   return (
-    <AppBar position="sticky" component="header">
-      <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ minHeight: 72 }}>
-          <Typography
-            component={Link}
-            href="/"
-            variant="h6"
-            sx={{ textDecoration: 'none', color: 'inherit', fontWeight: 600, flexGrow: 1 }}
-          >
+    <header className="site-header">
+      <div className="container">
+        <div className="site-header__inner">
+          <Link href="/" className="site-name">
             Trevor Lee
-          </Typography>
+          </Link>
 
-          <Stack direction="row" spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {navItems.map((item) => {
-              const active = isActive(item.href);
+          <nav className="site-nav" aria-label="Main">
+            <ul>
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-              return (
-                <Button
-                  key={item.href}
-                  component={Link}
-                  href={item.href}
-                  color="inherit"
-                  sx={{
-                    border: active ? '1px solid' : '1px solid transparent',
-                    borderColor: active ? 'divider' : 'transparent',
-                    backgroundColor: active ? 'background.paper' : 'transparent'
-                  }}
-                >
-                  {item.label}
-                </Button>
-              );
-            })}
-          </Stack>
-
-          <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
-            <IconButton
-              color="inherit"
-              onClick={toggleMode}
-              aria-label={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              sx={{ ml: { xs: 0, md: 1 } }}
-            >
-              {mode === 'light' ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
-            </IconButton>
-          </Tooltip>
-
-          <IconButton
-            color="inherit"
-            aria-label="Open menu"
-            aria-controls="mobile-navigation"
-            aria-expanded={drawerOpen}
-            onClick={() => setDrawerOpen(true)}
-            sx={{ display: { xs: 'inline-flex', md: 'none' } }}
+          {/* Both icons render; CSS shows the one for the current mode, so
+              there is nothing to mismatch during hydration. */}
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleMode}
+            aria-label="Switch between light and dark mode"
           >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </Container>
-
-      <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <Box id="mobile-navigation" sx={{ width: 260, p: 2 }} role="navigation" aria-label="Mobile navigation">
-          <Stack spacing={1}>
-            {navItems.map((item) => {
-              const active = isActive(item.href);
-
-              return (
-                <Button
-                  key={item.href}
-                  component={Link}
-                  href={item.href}
-                  onClick={() => setDrawerOpen(false)}
-                  variant={active ? 'contained' : 'text'}
-                  color={active ? 'primary' : 'inherit'}
-                  sx={{ justifyContent: 'flex-start' }}
-                >
-                  {item.label}
-                </Button>
-              );
-            })}
-          </Stack>
-        </Box>
-      </Drawer>
-    </AppBar>
+            <svg
+              className="theme-toggle__moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
+            </svg>
+            <svg
+              className="theme-toggle__sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
   );
 }

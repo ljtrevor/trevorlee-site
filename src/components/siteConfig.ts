@@ -1,23 +1,23 @@
 export const siteConfig = {
   name: 'Trevor Lee',
-  title: 'Trevor Lee | AI Security & Privacy',
+  title: 'Trevor Lee | AI Adoption and Engineering',
   description:
-    'Personal website of Trevor Lee focused on AI systems, security, privacy-conscious design, and resilient systems.',
+    'Trevor Lee helps teams adopt AI and builds the systems behind it. Seven years of software engineering across AI analytics, LLM integrations, and enterprise APIs.',
   url: 'https://trevorlee.ca',
   image: '/images/headshot-avatar.webp',
-  location: 'Vancouver, BC',
+  location: 'Greater Vancouver, BC',
   keywords: [
     'Trevor Lee',
+    'AI adoption',
+    'AI enablement',
     'AI systems',
-    'AI security',
-    'privacy engineering',
+    'LLM integration',
+    'software engineering',
     'security engineering',
-    'resilient systems',
     'CISSP'
   ],
   email: 'trevor@trevorlee.ca',
   emailObfuscated: 'trevor [at] trevorlee.ca',
-  tagline: 'Thoughtful AI systems. Secure by design.',
   links: {
     linkedin: 'https://www.linkedin.com/in/ljtrevor/',
     github: 'https://github.com/ljtrevor'
