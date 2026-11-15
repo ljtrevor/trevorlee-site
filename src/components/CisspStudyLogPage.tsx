@@ -338,7 +338,7 @@ export function CisspStudyLogPage({
       <header className="page-head">
         <h1 className="page-title">CISSP study log</h1>
         <p className="lede">
-          I’m preparing for the CISSP with <cite>{STUDY_SOURCE_TITLE}</cite>. Each entry records
+          I am preparing for the CISSP with <cite>{STUDY_SOURCE_TITLE}</cite>. Each entry records
           the chapters I covered and what stood out.
         </p>
       </header>

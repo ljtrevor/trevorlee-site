@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { DetailedRoleRows } from '@/components/RoleRows';
 import { shareImages, siteConfig } from '@/components/siteConfig';
-import { education, operationsSkills, roles, technicalSkills } from '@/data/profile';
+import { roles } from '@/data/profile';
 
 const description =
   'Trevor Lee’s background: seven years of software engineering at Workday and ThoughtExchange, AI consulting, and AI adoption and operations work today.';
@@ -57,11 +57,11 @@ export default function AboutPage() {
               keeping the systems behind it reliable.
             </p>
             <p>
-              I studied software engineering at the University of Victoria. After graduating I
-              joined Workday, where I worked on APIs for the People Experience
-              platform and served as Co-Scrum Master. Then came five years at ThoughtExchange.
-              Most of my work there became AI: survey analytics for more than 500 school
-              districts, the integrations around them, and the on-call rotations that kept them
+              After earning a software engineering degree at the University of Victoria, I joined
+              Workday, where I worked on APIs for the People Experience platform and served as
+              Co-Scrum Master for my team. Then came five years at ThoughtExchange, where most of
+              my work became AI: survey analytics for 500+ school districts, the integrations
+              around them, and the on-call rotations that kept them
               running.
             </p>
             <p>
@@ -71,7 +71,7 @@ export default function AboutPage() {
             </p>
             <p>
               The part I care about most is what happens after launch: whether a system is
-              reliable, documented, secure, and used. I’m studying for the CISSP to build on that
+              reliable, documented, secure, and used. I am studying for the CISSP to build on that
               with risk and security architecture.{' '}
               <Link href="/cissp-study-log">The study log is public</Link>.
             </p>
@@ -84,26 +84,6 @@ export default function AboutPage() {
           Experience
         </h2>
         <DetailedRoleRows roles={roles} />
-      </section>
-
-      <section className="block" aria-labelledby="more-title">
-        <h2 className="block__title" id="more-title">
-          Education and skills
-        </h2>
-        <div className="row">
-          <h3 className="row__label">Education</h3>
-          <p className="row__body">
-            {education.degree}, {education.school}.
-          </p>
-        </div>
-        <div className="row">
-          <h3 className="row__label">Operations</h3>
-          <p className="row__body">{operationsSkills}</p>
-        </div>
-        <div className="row">
-          <h3 className="row__label">Technical</h3>
-          <p className="row__body">{technicalSkills}</p>
-        </div>
       </section>
     </>
   );
