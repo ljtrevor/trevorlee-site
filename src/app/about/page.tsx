@@ -57,8 +57,9 @@ export default function AboutPage() {
               keeping the systems behind it reliable.
             </p>
             <p>
-              After a software engineering degree at the University of Victoria, I joined Workday,
-              where I worked on APIs for the People Experience platform and served as Co-Scrum
+              After earning a software engineering degree at the University of Victoria, I joined
+              Workday, where I worked on APIs for the People Experience platform and served as
+              Co-Scrum
               Master. Then came five years at ThoughtExchange, where most of my work became AI:
               survey analytics for 500+ school districts, the integrations around them, and the
               on-call rotations that kept them
