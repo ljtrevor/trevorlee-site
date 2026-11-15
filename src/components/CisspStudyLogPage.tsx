@@ -7,7 +7,6 @@ import {
   CardContent,
   Chip,
   FormControl,
-  Grid,
   InputLabel,
   LinearProgress,
   MenuItem,
@@ -295,14 +294,9 @@ export function CisspStudyLogPage({
           maxWidth: '100%',
           boxSizing: 'border-box',
           minWidth: 0,
-          borderRadius: 3,
-          background: (theme) =>
-            theme.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, rgba(147,166,187,0.14), rgba(142,168,145,0.14))'
-              : 'linear-gradient(135deg, rgba(95,112,131,0.1), rgba(111,131,113,0.1))'
         }}
       >
-        <CardContent sx={{ py: 1.75 }}>
+        <CardContent sx={{ py: 1.75, '&:last-child': { pb: 1.75 } }}>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={1.5}
@@ -332,11 +326,8 @@ export function CisspStudyLogPage({
 
   return (
     <Stack
-      spacing={1}
-      className="section-enter"
+      spacing={0}
       sx={{
-        py: { xs: 4, md: 5 },
-        px: { xs: 2, sm: 3, md: 0 },
         width: '100%',
         maxWidth: '100%',
         boxSizing: 'border-box',
@@ -344,30 +335,26 @@ export function CisspStudyLogPage({
         overflowX: 'hidden'
       }}
     >
-      <Box
-        component="header"
-        sx={{ width: '100%', maxWidth: 860, boxSizing: 'border-box', minWidth: 0 }}
-      >
-        <Typography component="h1" variant="h3" gutterBottom>
-          CISSP Study Log
-        </Typography>
-        <Typography color="text.secondary">
-          This page tracks my CISSP preparation using the <em>{STUDY_SOURCE_TITLE}</em>. <br />
-          I log each study session with the chapters covered and notes on concepts, questions, or insights that stood out.
-        </Typography>
-      </Box>
+      <header className="page-head">
+        <h1 className="page-title">CISSP study log</h1>
+        <p className="lede">
+          I’m preparing for the CISSP with <cite>{STUDY_SOURCE_TITLE}</cite>. Each entry records
+          the chapters I covered and what stood out.
+        </p>
+      </header>
 
-      <Grid
-        container
-        rowSpacing={3}
-        columnSpacing={{ xs: 0, lg: 3 }}
-        alignItems="flex-start"
-        sx={{ m: 0, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: 'minmax(0, 1fr)', md: 'minmax(0, 1fr) minmax(0, 2fr)' },
+          gap: 3,
+          alignItems: 'start'
+        }}
       >
-        <Grid item xs={12} lg={4} sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}>
+        <Box sx={{ minWidth: 0 }}>
           <Stack
             spacing={3}
-            sx={{ position: { lg: 'sticky' }, top: { lg: 24 }, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+            sx={{ position: { md: 'sticky' }, top: { md: 24 }, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
           >
             <Card>
               <CardContent>
@@ -458,7 +445,7 @@ export function CisspStudyLogPage({
               <CardContent>
                 <Stack spacing={2}>
                   <Typography variant="h6" component="h2">
-                    Chapter Coverage
+                    Chapter coverage
                   </Typography>
                   <Typography color="text.secondary" variant="body2">
                     Click any chapter to filter entries by chapter.
@@ -486,9 +473,9 @@ export function CisspStudyLogPage({
               </CardContent>
             </Card>
           </Stack>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} lg={8} sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}>
+        <Box sx={{ minWidth: 0 }}>
           <Stack
             spacing={2.5}
             component="section"
@@ -503,8 +490,7 @@ export function CisspStudyLogPage({
               return (
                 <Card
                   key={entry.id}
-                  className="card-lift section-enter"
-                  sx={{ borderRadius: 3, width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
+                  sx={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
                 >
                   <CardContent sx={{ p: { xs: 2, sm: 2.5 } }}>
                     <Stack spacing={1.8}>
@@ -598,8 +584,8 @@ export function CisspStudyLogPage({
 
             {renderPaginationSection('Bottom')}
           </Stack>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Stack>
   );
 }

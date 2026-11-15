@@ -1,6 +1,6 @@
 'use client';
 
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import type { PropsWithChildren } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -64,7 +64,6 @@ export function Providers({ children }: PropsWithChildren) {
   return (
     <ColorModeContext.Provider value={contextValue}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>

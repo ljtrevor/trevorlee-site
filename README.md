@@ -1,11 +1,12 @@
 # Trevor Lee Personal Website
 
-Production-ready personal site built with Next.js App Router, React, TypeScript, and MUI.
+Personal site built with Next.js App Router, React, and TypeScript. Pages are plain CSS; MUI is used only on the CISSP study log.
 
 ## Stack
 - Next.js 15 (App Router)
 - React 18 + TypeScript
-- MUI v5 + Emotion
+- Plain CSS with design tokens in `src/app/globals.css`
+- MUI v5 + Emotion (CISSP study log page only)
 - Static export for deployment (`output: 'export'`)
 
 ## Routes
@@ -18,7 +19,7 @@ Production-ready personal site built with Next.js App Router, React, TypeScript,
 - Static export enabled in `next.config.js`
 - SEO metadata configured globally + per route
 - `robots.txt` and `sitemap.xml` generated via App Router metadata routes
-- Next font optimization with `next/font/google` (Plus Jakarta Sans)
+- Self-hosted fonts via `next/font/local` (Bricolage Grotesque and Source Serif 4, both SIL Open Font License, in `src/fonts/`)
 - Theme mode pre-hydration script to reduce flash and hydration mismatch risk
 - Accessibility improvements including reduced motion support and mobile nav ARIA state
 
@@ -45,6 +46,15 @@ Open `http://localhost:3000`.
 - `npm run start` Run Next production server (not required for S3 static hosting)
 - `npm run lint` Run ESLint
 - `npm run typecheck` Run TypeScript checks (`tsc --noEmit`)
+
+## Editing content
+Career content (selected work, roles, education, tools) lives in one file:
+- `src/data/profile.ts`
+
+Site name, description, and links:
+- `src/components/siteConfig.ts`
+
+Colours are CSS variables in `src/app/globals.css`. The MUI theme in `src/theme/theme.ts` mirrors them for the study log page, so change both together.
 
 ## CISSP Study Log Data
 Edit entries in:
@@ -86,9 +96,3 @@ npm run lint
 npm run typecheck
 npm run build
 ```
-
-## Troubleshooting
-### `next/font/google` fetch failures during build
-In restricted network environments, Google font downloads can fail during `npm run build`.
-- Verify outbound access in CI/deploy environment.
-- Re-run build in a network with access to Google Fonts endpoints.

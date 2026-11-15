@@ -1,80 +1,62 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import LocalCafeOutlinedIcon from '@mui/icons-material/LocalCafeOutlined';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Card, CardContent, Link as MuiLink, Stack, Typography } from '@mui/material';
 import type { Metadata } from 'next';
 
-import { Section } from '@/components/Section';
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
+
+const description = 'Reach Trevor Lee by email, LinkedIn, or GitHub.';
 
 export const metadata: Metadata = {
-  title: 'Contact | Trevor Lee',
-  description: 'Get in touch with Trevor Lee via email, LinkedIn, or GitHub.',
+  title: 'Contact',
+  description,
   alternates: { canonical: '/contact' },
   openGraph: {
     title: 'Contact Trevor Lee',
-    description: 'Reach Trevor Lee by email, LinkedIn, or GitHub.',
-    url: '/contact'
+    description,
+    url: '/contact',
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: shareImages,
     title: 'Contact Trevor Lee',
-    description: 'Reach Trevor Lee by email, LinkedIn, or GitHub.'
+    description
   }
 };
 
-const BUY_ME_A_COFFEE_URL = 'https://buymeacoffee.com/ljtrevor';
-const CONTACT_LINK_SX = { display: 'inline-flex', gap: 1, alignItems: 'center' } as const;
-
 export default function ContactPage() {
   return (
-    <Section>
-      <Stack spacing={3} sx={{ maxWidth: 720 }}>
-        <Typography component="h1" variant="h3">
-          Contact
-        </Typography>
-        <Typography color="text.secondary">
-          If you would like to collaborate or just connect, I&apos;d be happy to hear from you.
-        </Typography>
+    <>
+      <header className="page-head">
+        <h1 className="page-title">Contact</h1>
+        <p className="lede">
+          Email is the best way to reach me. I also take on a small amount of AI consulting work,
+          so write if you have a project in mind.
+        </p>
+      </header>
 
-        <Card>
-          <CardContent>
-            <Stack spacing={2.5}>
-              <MuiLink href={`mailto:${siteConfig.email}`} underline="hover" sx={CONTACT_LINK_SX}>
-                <MailOutlineIcon fontSize="small" /> {siteConfig.emailObfuscated}
-              </MuiLink>
-              <MuiLink
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-                sx={CONTACT_LINK_SX}
-              >
-                <LinkedInIcon fontSize="small" /> LinkedIn
-              </MuiLink>
-              <MuiLink
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-                sx={CONTACT_LINK_SX}
-              >
-                <GitHubIcon fontSize="small" /> GitHub
-              </MuiLink>
-              <MuiLink
-                href={BUY_ME_A_COFFEE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-                sx={CONTACT_LINK_SX}
-              >
-                <LocalCafeOutlinedIcon fontSize="small" /> Support my work
-              </MuiLink>
-            </Stack>
-          </CardContent>
-        </Card>
-      </Stack>
-    </Section>
+      <section className="block" aria-label="Ways to reach me">
+        <div className="row row--compact">
+          <h2 className="row__label">Email</h2>
+          <p className="row__body">
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.emailObfuscated}</a>
+          </p>
+        </div>
+        <div className="row row--compact">
+          <h2 className="row__label">LinkedIn</h2>
+          <p className="row__body">
+            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">
+              linkedin.com/in/ljtrevor
+            </a>
+          </p>
+        </div>
+        <div className="row row--compact">
+          <h2 className="row__label">GitHub</h2>
+          <p className="row__body">
+            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
+              github.com/ljtrevor
+            </a>
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,17 +1,26 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
-import { Box, Container } from '@mui/material';
+import localFont from 'next/font/local';
 
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { siteConfig } from '@/components/siteConfig';
+import { shareImages, siteConfig } from '@/components/siteConfig';
 import { Providers } from './providers';
 import './globals.css';
 
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
+// Fonts are self-hosted (SIL Open Font License, see src/fonts) so the build
+// never depends on Google Fonts and visitors' browsers never contact it.
+const sans = localFont({
+  src: '../fonts/bricolage-grotesque-latin-opsz-normal.woff2',
   variable: '--font-sans',
+  weight: '200 800',
+  display: 'swap'
+});
+
+const serif = localFont({
+  src: '../fonts/source-serif-4-latin-wght-normal.woff2',
+  variable: '--font-serif',
+  weight: '200 900',
   display: 'swap'
 });
 
@@ -70,20 +79,13 @@ export const metadata: Metadata = {
     siteName: 'Trevor Lee',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.image,
-        width: 1200,
-        height: 1200,
-        alt: 'Trevor Lee'
-      }
-    ]
+    images: shareImages
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.image]
+    images: shareImages
   }
 };
 
@@ -124,7 +126,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
@@ -138,17 +140,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <Providers>
+          <a className="skip-link" href="#main">
+            Skip to content
+          </a>
           <SiteHeader />
-          <Box component="main" sx={{ minHeight: 'calc(100vh - 210px)' }}>
-            <Container
-              maxWidth="lg"
-              sx={{
-                px: { xs: 2, sm: 3, md: 4 }
-              }}
-            >
-              {children}
-            </Container>
-          </Box>
+          <main id="main" className="container site-main">
+            {children}
+          </main>
           <SiteFooter />
         </Providers>
         {process.env.NEXT_PUBLIC_GA_ID ? (

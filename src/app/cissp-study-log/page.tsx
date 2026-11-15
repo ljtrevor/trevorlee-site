@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { CisspStudyLogPage } from '@/components/CisspStudyLogPage';
+import { shareImages } from '@/components/siteConfig';
 import { cisspEntries, getUniqueCompletedChapters } from '@/utils/cissp';
 
 export const metadata: Metadata = {
@@ -12,10 +13,12 @@ export const metadata: Metadata = {
     title: 'CISSP Study Log | Trevor Lee',
     description:
       'Public CISSP progress journal with chapter coverage, derived domains, and study notes.',
-    url: '/cissp-study-log'
+    url: '/cissp-study-log',
+    images: shareImages
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: shareImages,
     title: 'CISSP Study Log | Trevor Lee',
     description:
       'Public CISSP progress journal with chapter coverage, derived domains, and study notes.'
