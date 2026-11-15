@@ -55,12 +55,8 @@ export default function AboutPage() {
               keeping the systems behind it reliable.
             </p>
             <p>
-              I studied software engineering at the University of Victoria. Two of my co-ops were
-              operations work: IT infrastructure and access management at VertiGIS, and cloud
-              monitoring and incident runbooks for UVic’s high energy physics computing group.
-            </p>
-            <p>
-              After graduating I joined Workday, where I worked on APIs for the People Experience
+              I studied software engineering at the University of Victoria. After graduating I
+              joined Workday, where I worked on APIs for the People Experience
               platform and served as Co-Scrum Master. Then came five years at ThoughtExchange.
               Most of my work there became AI: survey analytics for more than 500 school
               districts, the integrations around them, and the on-call rotations that kept them
